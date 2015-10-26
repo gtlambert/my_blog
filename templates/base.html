@@ -1,7 +1,11 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>{% block title %}{% endblock %}</title>
+		<link rel="stylesheet" href="{% static 'css/main.css' %}">
+		<link rel="stylesheet" href="{% static 'css/normalise.css' %}">
 	</head>
 	<body>
 		{% block content %}{% endblock %}
