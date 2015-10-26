@@ -8,6 +8,11 @@
 		<link rel="stylesheet" href="{% static 'css/normalise.css' %}">
 	</head>
 	<body>
-		{% block content %}{% endblock %}
+		<div class="main-container">
+			<header>
+				The Header
+			</header>
+			{% block content %}{% endblock %}
+		</div>
 	</body>
 </html>

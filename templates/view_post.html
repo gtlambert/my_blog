@@ -1,7 +1,11 @@
 {% extends "base.html" %}
+	
+	{% load custom_markdown %}
 
-{% block title %}{{ post.title }}{% endblock %}
+	{% block title %}
+		{{ post.title }}
+	{% endblock %}
 
-{% block content %}
-{{ post.text }}
-{% endblock %}
+	{% block content %}
+		{{ post.text|custom_markdown }}
+	{% endblock %}
