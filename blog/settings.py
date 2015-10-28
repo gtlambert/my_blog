@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+# 1 for deployment
+live_flag = 0
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -75,12 +78,25 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if live_flag:
+    import dj_database_url
+    DATABASES = {}
+    
+    DATABASES['default'] =  dj_database_url.config()
+        
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+    # Allow all host headers
+    ALLOWED_HOSTS = ['*']
+    
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
 
 
 # Internationalization
@@ -105,3 +121,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/static/',
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
