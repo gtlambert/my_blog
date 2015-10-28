@@ -3,6 +3,10 @@
 	
 	{% load markdown_support %}
 
+	{% block title %}
+		{{ specific_post.title }} | George Lambert
+	{% endblock %}
+
 	{% block header-content %}
 		<h2>{{ specific_post.title }}</h2>
 		<span class="date">{{ specific_post.created_on|date:"d M Y" }}</span>
