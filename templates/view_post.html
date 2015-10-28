@@ -1,11 +1,34 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 	
 	{% load markdown_support %}
 
-	{% block title %}
-		{{ post.title }}
+	{% block header-content %}
+		<h2>{{ specific_post.title }}</h2>
+		<span class="date">{{ specific_post.created_on|date:"d M Y" }}</span>
 	{% endblock %}
 
-	{% block content %}
-		{{ post.text|custom_markdown }}
+	{% block main-content %}
+		{{ specific_post.text|custom_markdown }}
 	{% endblock %}
+
+	{% block custom-head-content %}
+		{% if specific_post.custom_css %}
+			<link rel="stylesheet" href="{% static specific_post.custom_css %}">
+		{% endif %}
+	{% endblock %}
+
+	{% block custom-closing-body-script-reference %}
+		{% if specific_post.custom_closing_body_script_reference %}
+			<script src="{% static specific_post.custom_closing_body_script_reference %}"></script>
+		{% endif %}
+	{% endblock %}
+
+	{% block custom-closing-body-script %}
+		{% if specific_post.custom_closing_body_script %}
+			<script src="{% static specific_post.custom_closing_body_script %}">
+			</script>
+		{% endif %}
+	{% endblock %}
+
+

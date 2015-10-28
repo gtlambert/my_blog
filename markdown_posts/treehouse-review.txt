@@ -1,0 +1,93 @@
+#### What is Treehouse?
+
+Treehouse is a subscription-based online coding school with a careers focus. It aims to teach you the skills required to gain an entry-level job in a variety of different web disciplines including design, front-end development and back-end development. It currently offers courses in the following topics:
+
+  * Android
+  * Business
+  * CSS
+  * Design
+  * Development Tools
+  * Digital Literacy
+  * Game Development
+  * HTML
+  * iOS
+  * Java
+  * JavaScript
+  * PHP
+  * Python
+  * Ruby
+  * WordPress
+
+Why should you probably sign up? One - it is awesome and addictive - and two - because it has an incredibly cool marketing video:
+
+<iframe  title="YouTube video player" src="http://www.youtube.com/v/mvqdhYYUHgA?html5=1" frameborder="0" allowfullscreen></iframe>
+
+#### Teaching style
+
+Teaching at Treehouse consists of videos, quizzes and code challenges which make up workshops, lessons, courses and tracks. You practice coding in the Treehouse online editor at the same time as watching videos, and then take a series of quizzes and code challenges to make sure that you understand the video content. The production is extremely professional - the following clip shows the kind of thing you can expect:
+
+<iframe  title="YouTube video player" src="http://www.youtube.com/v/uPeOsc5vKZ4?html5=1" frameborder="0" allowfullscreen></iframe>
+
+#### Pros
+
+  * **The teachers are awesome (mostly).** They really are. As far as I can tell, the guys and girls that Treehouse employ as teachers are generally at the top level in their field. They all have the rare ability to both understand and explain complex ideas clearly and concisely.
+
+  * **The online code editor**. This is particularly useful to start with because you don't need to worry about your development environment to start with. Learn some HTML/CSS/JavaScript first, worry about servers later...
+
+  * **You can get serious value out of Treehouse**. If you spend a lot of time on Treehouse (I certainly did to start with), then you can get serious value for money. The skills I have learnt so far through Treehouse (cost ~£200) are almost as valuable as the skills I learned in my entire maths degree at Oxford (cost ~£10,000).
+
+#### Cons
+
+  * **The forum.** The Treehouse forum can be used to get the answers to quizzes/code challenges that are part of the Treehouse courses, but if you are looking for top-quality code advice then you are much better off heading over to StackOverflow, where the community is far more skilled and knowledgeable.
+
+  * **You need a good internet connection.** If you don't have a speedy internet connection, you won't be able to stream the videos without constant buffering, and the online code editor won't work properly.
+
+  * **The online code editor.** This is great because it helps you get 'up and coding' quickly, and it is designed to support all programming languages that Treehouse offers. However, for lots of projects knowing how to code is only half the battle - the development environment and web deployment can be just as important. It is important to move away from the online code editor as soon as possible so that you learn how to set up a local development environment you are comfortable with.
+
+  * **It will teach you the basics, but it won't make you an expert**. Treehouse teaches you the basics in a variety of different disciplines and programming languages, but to become an expert you need practice, practice and more practice. Neither the Python track (16 hours) nor the longer JavaScript track (33 hours) will turn you into an expert overnight!
+
+  * **The Treehouse app**. I still don't really understand why Treehouse have spent time/money/effort on releasing iOS and android apps. I understand that people always want to be able to do things on the move, but to take Treehouse courses you really need to be able to code. Do people really code on their tablet or phone?? I certainly don't.
+
+#### My experience of Treehouse 
+
+I signed up to Treehouse in February 2015 and was instantly hooked. I've taken over 300 lessons, which means I've probably taken over 250 hours of lessons - quite a lot, when you consider that at a university you might only take 10-20 hours of lectures a week. When I joined, I was a Python developer with about 18 months experience coding, but no knowledge of front-end code. Since then I have used Treehouse to....
+
+1. *Consolidate my understanding of Python:* before joining Treehouse, my Python focus involved mathematical libraries such as Numpy, Pandas, SciPy and matplotlib. Kenneth Love's courses have helped me expand my all round understanding of the Python language. I now....
+
+  * use keywords more efficiently - including `map`, `filter` and `reduce`.
+  * regularly use the Flask and Django frameworks for web projects (this blog is built on Django).
+  * have mastered `list` and `dict` comprehensions.
+  * contribute to Python activity on StackOverflow.
+
+2. *Have a half-decent knowledge of HTML, CSS and JavaScript:* I'm competent enough with these web technologies to....
+
+  * use them regularly at work.
+  * easily produce simple websites like this one.
+  * build more complex websites that will hopefully (in time) be used by a wide-ish audience - I'm building one at the moment (more about that at a later date).
+
+3. *Have a much better development environment:* this consists of some of the best tools, as recommended by the teachers at Treehouse. I now use...
+
+  * Git for version control on a daily basis.
+  * Github and Bitbucket to store lots of my code, both publicly and privately.
+  * XAMPP server to run websites locally.
+  * Sublime Text for HTML/CSS/JavaScript.
+  * PyCharm for Python.
+  * Gulp as my task runner.
+  * Sass - to write bigger and better CSS.
+  * web templates including Bootstrap.
+
+#### Pricing
+
+It costs $25/month (£17/18 depending on the exchange rate). You get a two-week free trial, so you can try before you buy. There is a $49/month pro pricing plan which gives you access to bonus video content from conferences, but I can't really comment on this, since I don't have it! You can get 20% off your monthly bill for each friend you successfully refer.
+
+#### One more thing
+
+In this day and age one of the first things you do when you set up a company is check availability of trademarks, domain names and Twitter handles. Unless I'm missing something really obvious (!), I can't for the life of me work out why Treehouse is branded as Treehouse, but it's domain is http://www.teamtreehouse.com. A major faux pas if you ask me.
+
+#### And another thing
+
+One day I would love to work at Treehouse.....dream job!
+
+#### Conclusion
+
+With Treehouse, the bottom line is that the more you put in, the more you get out. The teaching materials are of the highest quality, and with enough time and dedication it is *impossible* to fail. Spend significant amounts of time taking and re-taking lessons, and practicing on personal projects, and you **will** become a successful developer. 10,000 hours......

@@ -1,5 +1,27 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
-{% block content %}
-<p>This is the homepage</p>
+{% block header-content %}
+<h2>George Lambert</h2>
+<ul>
+	<li><a href="https://github.com/lambo477"><img src="{% static 'images/icons/github48.png' %}"></a></li>
+	<li><a href="https://plus.google.com/116256635195202349615"><img src="{% static 'images/icons/google-plus-48.png' %}"></a></li>
+	<li><a href="https://teamtreehouse.com/georgelambert"><img src="{% static 'images/icons/treehouse48.png' %}"></a></li>
+	<li><a href="https://uk.linkedin.com/pub/george-lambert/30/228/b76"><img src="{% static 'images/icons/linkedin48.png' %}"></a></li>
+</ul>	
+{% endblock %}
+
+{% block main-content %}
+	<ul class="post-list">
+	{% for post in all_posts %}
+		<li class="item">
+			<div class="post-title-link">
+				<span class=""><a href="{% url 'view-post' slug=post.slug %}">{{ post.title }}</a></span>
+			</div>
+			<div class="post-date">
+				<span class="post-date">{{ post.created_on|date:"d M Y" }}</span>
+			</div>
+		</li>
+	{% endfor %}
+	</ul>
 {% endblock %}
