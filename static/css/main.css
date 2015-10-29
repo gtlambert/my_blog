@@ -82,7 +82,7 @@ html, body {
       height: 100%; }
       .main-container footer ul li {
         margin: auto 0;
-        display: box;
+        display: block;
         width: 25%;
         text-align: center;
         float: left;
@@ -98,5 +98,11 @@ html, body {
 
 div.clearfix {
   clear: both; }
+
+@media (max-width: 600px) {
+  footer li {
+    text-align: center;
+    width: 100%;
+    float: none; } }
 
 /*# sourceMappingURL=main.css.map */
