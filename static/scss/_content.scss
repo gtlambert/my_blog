@@ -139,6 +139,14 @@ html, body {
 				float: left;
 				box-sizing: border-box;
 
+				@media (max-width: 600px) {
+					text-align: center;
+					width: 50%;
+					float: none;
+					clear: both;
+					margin: 10px auto;
+				}
+
 				a {
 					padding: 4px;
 					text-decoration: none;
@@ -158,14 +166,3 @@ html, body {
 div.clearfix {
 	clear: both;
 }
-
-@media (max-width: 600px) {
-	footer {
-		li {
-			text-align: center;
-			width: 100%;
-			float: none;
-		}
-	}
-}
-
