@@ -5,7 +5,7 @@ from .models import Post
 
 
 def home(request):
-    all_posts = Post.objects.all()
+    all_posts = Post.objects.all().order_by('-created_on')
     context_dict = {'all_posts': all_posts}
     if settings.GOOGLE_ANALYTICS_TAG:
         context_dict['google_analytics_tag'] = settings.GOOGLE_ANALYTICS_TAG
