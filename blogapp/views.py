@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.conf import settings
 
 from .models import Post
 
@@ -6,6 +7,8 @@ from .models import Post
 def home(request):
     all_posts = Post.objects.all()
     context_dict = {'all_posts': all_posts}
+    if settings.GOOGLE_ANALYTICS_TAG:
+        context_dict['google_analytics_tag'] = settings.GOOGLE_ANALYTICS_TAG
     return render(request, 'index.html', context=context_dict)
 
 

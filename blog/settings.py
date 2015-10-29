@@ -14,7 +14,12 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 # 1 for deployment
-#live_flag = 0
+live_flag = 1
+
+if live_flag:
+    GOOGLE_ANALYTICS_TAG = 1
+else: 
+    GOOGLE_ANALYTICS_TAG = 0
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
