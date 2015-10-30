@@ -1,0 +1,27 @@
+As a junior programmer you are not generally directly taught to use the command line - it is expected that you just pick it up as you go along. This is fine, but people tend to focus on learning to write high quality code as opposed to improving command line skills. Sometimes, it is well worth taking a step back and learning a few command line tricks which improve your efficiency in your development environment.
+
+Below are 5 simple but non-glaringly-obvious Windows PowerShell tips which I found pretty useful when learning to code:
+
+#### 1.  Change the default name of each PowerShell window
+
+By default, each PowerShell window is titled 'shell'. 
+
+![powershell window showing default name](../static/images/powershell-tips/shell-no-name.png)
+
+This is fine, but it can get confusing when you have multiple windows open. In my development environment I might have three (or more) windows open - for this blog, I have one for running my local server, one for my gulp taskrunner and one for admin tasks (these tasks usually consist of running git commands, and navigating the project directory to open files as required). It can look like this:
+
+![multiple powershell windows all with the same name](../static/images/powershell-tips/shell-before.png)
+
+Having three windows open can get confusing, so naming them makes it easier! To change the name of your PowerShell window run the command:
+
+```
+$host.ui.RawUi.WindowTitle = "Admin"
+```
+
+Once altered, your shell will display the customized name at the top:
+
+![powershell window with name changed](../static/images/powershell-tips/shell-with-name.png)
+
+And if you are working with three windows - using one for a Django server, one for gulp and one for admin, you can now easily navigate - as shown below:
+
+![multiple powershell windows with customized names](../static/images/powershell-tips/shell-after.png)
