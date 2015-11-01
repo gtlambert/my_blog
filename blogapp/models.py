@@ -29,3 +29,28 @@ class Project(models.Model):
         
     def __unicode__(self):
         return self.title + ", " + self.category
+
+
+class Language(models.Model):
+    name = models.CharField(max_length=100)
+    start_date = models.DateField()
+    image_path = models.CharField(max_length=100) # will this need to be markdown using template tag filter?
+    
+    def __unicode__(self):
+        return self.name
+
+
+class LanguageCategory(models.Model):
+    name = models.CharField(max_length=100)
+    parent_language = models.ForeignKey(Language)
+    
+    def __unicode__(self):
+        return self.name
+
+
+class LanguageModule(models.Model):
+    name = models.CharField(max_length=100)
+    parent_language_category = models.ForeignKey(LanguageCategory)
+    
+    def __unicode__(self):
+        return self.name

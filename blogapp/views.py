@@ -21,5 +21,6 @@ def view_post(request, slug):
                     }
     return render(request, 'view_post.html', context=context_dict)
 
-def my_stack(request):
-    return render(request, 'my_stack.html')
+def about(request):
+    context_dict = {}
+    return render(request, 'about.html', context=context_dict)

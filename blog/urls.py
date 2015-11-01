@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'blogapp.views.home', name='home'),
     url(r'^blog/', include('blogapp.urls')),
+    url(r'^about', 'blogapp.views.about', name='about'),
 ]
