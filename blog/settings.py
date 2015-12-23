@@ -18,7 +18,7 @@ live_flag = 1
 
 if live_flag:
     GOOGLE_ANALYTICS_TAG = 1
-else: 
+else:
     GOOGLE_ANALYTICS_TAG = 0
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,7 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blogapp',
-    'nested_inline',
+    #'nested_inline',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -87,15 +87,15 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 #if live_flag:
 #    import dj_database_url
 #    DATABASES = {}
-#    
+#
 #    DATABASES['default'] =  dj_database_url.config()
-#        
+#
 #    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 #    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-#    
+#
 #    # Allow all host headers
 #    ALLOWED_HOSTS = ['*']
-#    
+#
 #else:
 DATABASES = {
     'default': {
@@ -129,5 +129,5 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    
+
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
