@@ -1,0 +1,50 @@
+Having worked as a coder for the best part of three years, I recently found myself in a position where I wanted to find new (and better) ways to develop my skills. Most people say that learning to code is like learning a spoken language - you progress quickest by speaking the lanaguage - or in the case of code, writing it. However, there is no doubt that when you reach a certain standard it is essential that you start reading books to further your knowledge. Why? The two main reasons are as follows:
+
+#### 1. Reading books fills gaps in your knowledge of basic concepts
+I had been writing Python for 2.5 years before I picked up a pretty simple book about the language (Python Pocket Reference, Mark Lutz). On reading, I found that I already knew 90% of the content. However, because I had previously only ever picked up new tricks by Googling/using Stack Overflow, there were still basic concepts in the remaining 10% of the book which I definitely hadn't come across before. 
+
+#### 2. You need to understand some skills in relative depth before being able to use them (eg Git)
+It is pretty important to have a basic understanding of a version control system like Git before using it on a live project. If you don't, you might find that you somehow lose/delete/corrupt/break your previously immaculate repository consisting of thousands of lines of code.
+
+With reason 2. in mind, I recently read and studied 'Git Pocket Guide' by Richard E.Silverman. Here is my review:
+
+![git pocket guide front cover](../static/images/git-pocket-guide-review/git-pocket-guide)
+
+The Git Pocket Guide is an absolutely excellent read if you are a junior programmer with a little (but not too much!) hands-on Git experience. When I read it I had been using Git on personal projects for about 6 months, and had been using Git pretty intensely for a month as part of a large remote team regularly making small changes to a large central repository.
+
+The thing that I like about Git Pocket Guide is that Silverman tries to talk you through Git chronologically, if that makes sense. Too many code books try to act as a dictionary - you look up a command and see its implementation definition. That isn't what I require (I have Google for that!). Instead, Silverman talks you through Git like a story - starting with the basics required for working on individual projects before proceeding to working on repositories involving larger teams at a later stage.
+
+Some of the favourite commands/tools I picked up are as follows:
+
+```
+git log --oneline -10
+``` 
+- limits the display log to the last ten commits and simplifies each commit displayed to just one line
+
+```
+git diff --staged
+git diff --cached
+```
+- these commands do *exactly* the same thing - they show the difference between the staging area and the last commit, as opposed to `git diff`, which displays the difference between the working tree and the last commit.
+
+```
+git push origin :remote_branch
+``` 
+- deletes a remote branch called `remote_branch`.
+
+```
+git branch --all
+```
+- displays all branches, including remote ones.
+
+```
+git rebase -i HEAD~n
+```
+- generate and interface which allows you to manipulate your last `n` commits. For example, you might want to squash your last 5 local commits on a local branch before pushing the local branch to a remote repository for other members of your team to use.
+
+```
+git grep my_string
+```
+- allows you to search a `git` repository using the Linux `grep` command. This is very handy if you are working in a Windows environment (much better than eg `Select-String` in Powershell).
+
+If you have never read a book on Git, then I would thoroughly recommend reading Git Pocket Guide as a starting point. Getting good at Git will allow you to focus more of your time on actual programming, as opposed to version control problems. The book is extremely readable, and presents some difficult concepts in understandable ways. I read the book on the train to and from work for about a month on and off. My strategy was to try and learn one new command each on each journey and then apply it at work as quickly as possible, thus making it part of my workflow.
