@@ -1,0 +1,240 @@
+So - you know some Python, HTML and CSS, and you've ventured into Django for the first time. You've put together your first Django project, and you are now in a position to deploy it. Unfortunately, however, this can't be done at the click of a button (initially at least!). I think that the deployment of your first Django project is harder than putting together the project itself. The deployment is a skill in itself, and you should approach it in exactly the same way as you approach learning to code - start with a very, very simple example, and build up your knowledge through lots of practice. Eventually, the deployment will become second nature.
+
+There are several popular platforms out there for deploying Django apps. The top 3 are probably AWS, Google App Engine and Heroku. This article will talk you through the deployment of the most basic Django app (without any CSS or static files eg images) to Heroku, using a Windows environment. Of course, I am 99.9% confident that your Django app contains CSS files - however, it is best that you start with the simplest Django deployment possible and then progress from there.
+
+#### Prerequisites
+- you need to have Git installed, and a basic working knowledge of Git.
+- an installation of `pip`. If you don't have this, you can install `pip` using [these instructions](https://pip.pypa.io/en/stable/installing/). `pip` is installed by default in Python version 2.9 and later. You can check your Python version by opening the Python shell and running
+
+```
+>>> import sys
+>>> sys.version
+'2.7.9 | 64-bit | (default, Jul  1 2015, 03:41:50) [MSC v.1500 64 bit (AMD64)]'
+```
+
+- an installation and working knowledge of `virtualenv`. This can be installed using `pip`:
+
+```
+>>> pip install virtualenv
+```
+
+- a Heroku account - you can sign up [here](https://signup.heroku.com/). (to be clear, you do not need to pay to deploy a basic Django app to Heroku, you will not have to pay for anything at any point in this tutorial!).
+- Heroku Toolbelt. This can be downloaded [here](https://toolbelt.heroku.com/). This allows you to connect to your Heroku account via Windows Powershell.
+
+The majority of problems encountered when deploying your first Django app to Heroku will be caused by problems with `git`, `pip` or `virtualenv`. If you do encounter problems in the steps that follow, it is thoroughly recommended to go back and practice working with `git`, `pip` and `virtualenv` until you really understand them, and are confident in using them.
+
+#### 1. Getting Started
+Navigate to your `Dcouments` folder in Powershell, and run
+
+```
+Documents> django-admin startproject first_django_app
+Documents> cd first_django_app
+```
+
+Running the app locally will now display the default Django app.
+
+```
+Documents/first_django_app> python manage.py runserver
+```
+
+Navigatiing to `http://127.0.0.1:8000/` in your browser will display the following:
+
+![default django app](../static/images/deploying-first-django-app-to-heroku/django_default.png)
+
+You have now verified that your basic Django app is running locally, and are ready to deploy to Heroku.
+
+#### 2. Setting up your Virtual Environment
+Next, you need to set up a virtual environment in your project folder. This virtual environment will be used to tell Heroku which Python packages your Django app needs to use. For example, if your Django app uses `numpy` to do some numerical processing on the backend, you will need to include `numpy` in your virtual environment. Navigate to the root of your project folder and run:
+
+```
+Documents/first_django_app> virtualenv venv
+Documents/first_django_app> cd venv/Scripts
+```
+
+To activate your virtual environment, run:
+
+```
+Documents/first_django_app/venv/Scripts> .\activate
+```
+
+`(venv)` should now appear at the beginning of your path in Powershell. You can deactivate the virtual environment in Powershell at any time by running `deactivate`.
+
+Now that your virtual environment is activated, you are in a position to install the Python packages that Heroku requires for Django. The packages required are as follows:
+
+- django
+- gunicorn
+- dj-database-url
+- dj-static
+- psycopg2
+- static3
+- wheel
+
+You can install all of these packages with:
+
+```
+Documents/first_django_app> pip install django-toolbelt
+```
+
+However, if you encounter error messages while installing these packages then you might have to install each one individually (again, with `pip`). For example, when I first started using Heroku I had problems installing `psycopg2` with `pip`. I therefore installed each of the required Python packages using `pip`, but used `easy_install` to install `psycopg2`.
+
+#### 3. Create a Procfile (Process File)
+Each Django app deployed to Heroku requires a Procfile. Navigate to the root of the project and run:
+
+```
+Documents/first_django_app> new-item Procfile
+``` 
+
+Do *not* make the Procfile a text file. Open the Procfile in an editor (eg Notepad) and paste the following into your Procfile:
+
+```
+web: gunicorn first_django_app.wsgi --log-file -
+```
+
+#### 4. Create a Requirements File
+Heroku recognises the packages used in your Django app by looking inside the `requirements.txt` file. You create your requirements file using `pip` and `virtualenv`. Running `pip freeze requirements` will display the packages that you have installed in your virtual environment.
+
+```
+Documents/first_django_app> pip freeze requirements
+dj-database-url==0.3.0
+dj-static==0.0.6
+Django==1.9
+django-toolbelt==0.0.1
+gunicorn==19.4.1
+psycopg2==2.6.1
+static3==0.6.1
+wheel==0.24.0
+```
+To save these requirements to your `requirements.txt` file, run `pip freeze > requirements.txt`.
+
+```
+Documents/first_django_app> pip freeze > requirements.txt
+```
+
+Your `requirements.txt` file will look like this:
+
+```
+dj-database-url==0.3.0
+dj-static==0.0.6
+Django==1.9
+django-toolbelt==0.0.1
+gunicorn==19.4.1
+psycopg2==2.6.1
+static3==0.6.1
+wheel==0.24.0
+```
+
+*Key Step*: in Windows, your `requirements.txt` file will be in Unicode format by default. What the official Heroku documentation doesn't mention is that the `requirements.txt` file must be saved in `ANSI` format for the Django app to be deployed to successfully. Open your `requirements.txt` file in an editor (eg Notepad), click 'Save As' and change the encoding to `ANSI`.
+
+![save heroku requirements file as ANSI](../static/images/deploying-first-django-app-to-heroku/requirements_ansi.png)
+
+#### 5. Save your Django app using Git
+First, create a `.gitignore` file:
+
+```
+Documents/first_django_app> new-item .gitignore
+```
+
+Open the `.gitignore` file and write `venv`. This will make `git` ignore the `venv` directory - we can do this because Heroku doesn't need to see the `venv` directory - it can get all the information it needs about Python packages from the `requirements.txt` file. Next, initialise your git repository and make a first commit:
+
+```
+Documents/first_django_app> git init
+Documents/first_django_app> git add --all
+Documents/first_django_app> git commit -m "first commit with app ready for deployment"
+```
+
+#### 6. Deploy your app to Heroku
+Login to the Heroku toolbelt using:
+
+```
+Documents/first_django_app> heroku login
+```
+
+Enter your Heroku email address, username and password in Powershell if prompted. Then run
+
+```
+Documents/first_django_app> heroku create
+Creating sleepy-island-7305... done, stack is cedar-14
+https://sleepy-island-7305.herokuapp.com/ | https://git.heroku.com/sleepy-island-7305.git
+Git remote heroku added
+```
+
+This creates a Heroku app at `https://sleepy-island-7305.herokuapp.com/` and adds a Git remote called `heroku` so that when you push your reposity to the `heroku` remote, it will update the app URL. I can view the `heroku` remote in the command line with:
+
+```
+Documents/first_django_app> git remote -v
+heroku  https://git.heroku.com/sleepy-island-7305.git (fetch)
+heroku  https://git.heroku.com/sleepy-island-7305.git (push)
+```
+
+To deploy the app to Heroku, run
+
+```
+Documents/first_django_app> git push heroku master
+```
+
+Depending on your internet connection, your app may take anywhere betwen 15 seconds and 10 minutes (or more!) to upload. The following messages appear in Powershell:
+
+```
+Counting objects: 16, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (13/13), done.
+Writing objects: 100% (16/16), 4.95 KiB | 0 bytes/s, done.
+Total 16 (delta 1), reused 0 (delta 0)
+remote: Compressing source files... done.
+remote: Building source:
+remote:
+remote: -----> Python app detected
+remote: -----> Installing runtime (python-2.7.11)
+remote: -----> Installing dependencies with pip
+remote:        Collecting dj-database-url==0.3.0 (from -r requirements.txt (line 1))
+remote:        Downloading dj_database_url-0.3.0-py2.py3-none-any.whl
+remote:        Collecting dj-static==0.0.6 (from -r requirements.txt (line 2))
+remote:        Downloading dj-static-0.0.6.tar.gz
+remote:        Collecting Django==1.9 (from -r requirements.txt (line 3))
+remote:        Downloading Django-1.9-py2.py3-none-any.whl (6.6MB)
+remote:        Collecting django-toolbelt==0.0.1 (from -r requirements.txt (line 4))
+remote:        Downloading django-toolbelt-0.0.1.tar.gz
+remote:        Collecting gunicorn==19.4.1 (from -r requirements.txt (line 5))
+remote:        Downloading gunicorn-19.4.1-py2.py3-none-any.whl (112kB)
+remote:        Collecting psycopg2==2.6.1 (from -r requirements.txt (line 6))
+remote:        Downloading psycopg2-2.6.1.tar.gz (371kB)
+remote:        Collecting static3==0.6.1 (from -r requirements.txt (line 7))
+remote:        Downloading static3-0.6.1.tar.gz
+remote:        Collecting wheel==0.24.0 (from -r requirements.txt (line 8))
+remote:        Downloading wheel-0.24.0-py2.py3-none-any.whl (63kB)
+remote:        Installing collected packages: dj-database-url, static3, dj-static, Django, psycopg2, gunicorn, django-toolbelt, wheel
+remote:        Running setup.py install for static3
+remote:        Running setup.py install for dj-static
+remote:        Running setup.py install for psycopg2
+remote:        Running setup.py install for django-toolbelt
+remote:        Successfully installed Django-1.9 dj-database-url-0.3.0 dj-static-0.0.6 django-toolbelt-0.0.1 gunicorn-19.4.1 psycopg2-2.6.1 static3-0.6.1 wheel-0.24.0
+remote:
+remote: -----> Preparing static assets
+remote:        Collectstatic configuration error. To debug, run:
+remote:        $ heroku run python manage.py collectstatic --noinput
+remote:
+remote: -----> Discovering process types
+remote:        Procfile declares types -> web
+remote:
+remote: -----> Compressing... done, 41.1MB
+remote: -----> Launching... done, v4
+remote:        https://sleepy-island-7305.herokuapp.com/ deployed to Heroku
+remote:
+remote: Verifying deploy.... done.
+To https://git.heroku.com/sleepy-island-7305.git
+ * [new branch]      master -> master
+```
+
+Of course, your app will not be deploying to `sleepy-island-7305` like mine - it will be using another app name. You can now visit your app at the designated URL shown in Powershell (mine is `https://sleepy-island-7305.herokuapp.com/`).
+
+![django heroku app live](../static/images/deploying-first-django-app-to-heroku/django_app_live.png)
+
+#### 7. Key Tips
+If you are having problems with any of the above steps, then go back and read, re-read and re-read this article. Make sure you are following each step exactly as I show you - you have to be precise. If you are new to any of `git`, `pip` or `virtualenv` then go away and practice them until you understand them more comprehensively and are confident when using them. This will make the process of deploying Django apps to Heroku quicker and easier.
+
+#### 8. Code
+The code for this project (minus the virtual environment) is available at `https://github.com/lambo477/first_django_app`.
+
+
+
+
