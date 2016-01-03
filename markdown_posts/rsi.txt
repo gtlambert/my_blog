@@ -1,0 +1,49 @@
+Unfortunately, if you work as a developer then you may well develop a repetitive strain injury (RSI) at some point in your career. RSIs can be extremely painful, stressful and frustrating, so it is important to take them seriously from the start and treat your body well. Here are some tips for preventing and coping with RSIs.
+
+#### 1. Exercise regularly
+It can surely be no secret that exercising regularly is key to preventing RSI. Working 80 hour weeks might be good for your career in the short-term, but for developers (in particular) it is not sustainable. If you exercise regularly and keep your core muscles strong then you are far less likely to suffer from RSI symptoms when you do have to work long hours.
+
+#### 2. Try not to worry about money that you spend on ergonomic equipment!
+You might be spending 40, 50 or even 60 hours a week coding with your job, so it is important that you are comfortable. This means that you (or rather your employer) needs to purchase the correct equipment. The majority of employers would rather spend a small-ish sum of money on buying their employees the correct equipment than lose an employee to illness, so don't be afraid to ask! If you need a better chair - ask for one. The same goes for desks, monitors, monitor-raisers, mice, keyboards and anything else you might need....
+
+#### 3. Get an ergonomic mouse
+Which mouse you use is really down to preference, but what works well for me are vertical mice. I find the hand and arm position using the [ESYNiC KB048](http://www.esynic.com/wp-includes/WEB/KB048.htm) extremely comfortable, and it has a couple of extra buttons which by default take you 'back' and 'forwards' in internet browsers. In particular, the scroll button is a lot more comfortable than on normal mice. I think (!) the extra buttons can be programmed to do all sorts of fancy things, but this isn't something I've looked into. 
+
+![ergonomic mouse](../static/images/rsi/mouse1.jpg)
+
+Pro: the ESYNiC KB048 is available for just £12 from [Amazon](http://www.amazon.co.uk/gp/product/B00W9MRBFY?keywords=ergonomic%20mouse&qid=1451752814&ref_=sr_1_8&sr=8-8). Con: as far as I'm aware, it is only available in a right-handed version.
+
+#### 4. Alternate the mouse between your left and right hands
+Put simply, this makes sense. Switch the mouse between your right and left hand to prevent overuse of one particular shoulder, arm, wrist or set of fingers. If you are using a specialist right-handed mouse, then simply buy two mice - one for each hand. I use the [HP Wireless Z4000](http://www.amazon.co.uk/HP-Wireless-Z4000-Mouse-Red/dp/B00G0FVI5U/ref=sr_1_4?ie=UTF8&qid=1451753893&sr=8-4&keywords=hp+z4000) in my left hand and the [ESYNiC KB048](http://www.esynic.com/wp-includes/WEB/KB048.htm) in my right.
+
+![hp z4000 ergonomic mouse](../static/images/rsi/mouse2.jpg)
+
+If you haven't used the mouse in your 'wrong' hand at first then you will initially struggle. However, force yourself to learn and at a later stage you will be pleased that you stuck to your task!
+
+#### 5. Use multiple monitors
+This might not be quite as obvious as some of the other points, but it can be just as important. Using multiple monitors means that you don't have to switch between programmes as frequently. This means less use of the mouse, and less use of the tricky-and-awkward-but-frequently-used key combination of `Alt + Tab`.
+
+#### 6. Get an ergonomic chair
+Having a good chair really goes without saying. My choice of chair is the [Herman Miller Aeron](http://www.hermanmiller.com/products/seating/performance-work-chairs/aeron-chairs.html). It isn't cheap, but it is really is the king of chairs - it solved my back and neck problems within about 6 weeks of purchase. You can pick one up for about £900 on [Amazon](http://www.amazon.co.uk/gp/product/B0021EEOG4?keywords=herman%20miller%20aeron%20c&qid=1451755176&ref_=sr_1_2&sr=8-2), or you can get one second hand (as I did) at [London Aerons](http://www.londonaerons.co.uk/) for anywhere between £300 and £500.
+
+![herman miller aeron c](../static/images/rsi/chair.jpg)
+
+#### 7. Use an ergonomic keyboard
+My choice of keyboard is the [Fujitsu KBPC](http://www.tesco.com/direct/fujitsu-kbpc-e-keyboard-usb/405-1493.prd?skuId=405-1493&pageLevel=sku&sc_cmp=ppc_sh-_-sh-_-bg-_-405-1493&gclid=CKnntLafjcoCFSHmwgodjy4F7A&gclsrc=aw.ds). Key features include a built in wrist pad, the ability to tilt the back of the keyboard up towards you, and the ability to split the left and right hand sections of the keyboard so they fit your arm/hand position more naturally. The keyboard also deliberately excludes the numeric keypad so that your right hand/shoulder is not forced into an unnaturally wide position when using the mouse.
+
+![herman miller aeron c](../static/images/rsi/keyboard1.jpg)
+
+#### 8. Make a note of the exact setup that works for you, and stick to it
+For example, I know that in order to be comfortable, I need a 76cm high desk, and that the bottom of my monitors should be 40cm above this desk. Once you have found your ideal position, make a note of the equipment you are using and the position you are in, and stick to it wherever you go.
+
+#### 9. Learn to touch type
+This is a pretty extreme measure (which I haven't tried). However, if you are suffering from RSI because you are using unnatural finger patterns when typing, it will be well worth learning to touch type properly. Unfortunately, this may well take a long time.....
+
+#### 10.  Use Sharpkeys
+If you are having a problem with one particular key on the keyboard (something you use regularly - perhaps `Alt`, `Shift` or `Ctrl`), you can use [Sharpkeys](https://sharpkeys.codeplex.com/) to map one key to another in Windows. For example, you could turn the `]` into an `Alt` for convenience, or turn the right `Ctrl` into an `Alt`. Again, this is a pretty extreme measure.
+
+
+
+
+
+
