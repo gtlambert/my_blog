@@ -2,8 +2,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@^+w$l8be(w=2h$-f2n!-tu^9_of+aix)bwm$$p)0a64#=7z^d'
+SECRET_KEY = os.environ['MY_BLOG_SECRET_KEY']
 
 DEBUG = True
 
