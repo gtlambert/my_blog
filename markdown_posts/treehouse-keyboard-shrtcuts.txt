@@ -1,0 +1,18 @@
+Of late, I've been using [Treehouse](http://referrals.trhou.se/georgelambert) a *lot* to brush up on various coding languages. As with any piece of software or website that you use for a significant period of time, it is worthwhile taking the time to learn the keyboard shortcuts, because it will save you time in the long run.
+
+I couldn't find a comprehensive list of Treehouse keyboard shortcuts, so I've tried to put one together here. The shortcuts are for Windows, but I'm sure that you will be able to guess the corresponding shortcuts for Mac/Linux.
+
+#### Videos
+* `F`: toggles full screen on and off.
+* `LEFT`: rewinds video ~10 seconds.
+* `RIGHT`: fast forwards video ~10 seconds.
+* `SPACEBAR`: pauses/restarts video.
+
+#### Code Challenges
+* `CTRL` + `ENTER`: submits your code - ie automatically hits the 'check work' button.
+
+#### Quizzes
+* `A`, `B`, `C`, `D`: selects appropriate answer from multiple choice list.
+* `T`, `F`: selects `True` or `False` for appropriate questions. 
+
+Use these shortcuts, and it should make learning on Treehouse even easier....
