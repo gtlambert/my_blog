@@ -1,0 +1,243 @@
+So - you know some Python, HTML and CSS, and you've ventured into Flask for the first time. You've put together your first app, and you are now in a position to deploy it. Unfortunately, however, this can't be done at the click of a button (initially at least!). The deployment of your first Flask app is certainly harder than putting together the app itself. The deployment is a skill in itself, and you should approach it in exactly the same way as you approach learning to code - start with a very, very simple example, and build up your knowledge through lots of practice. Eventually, the deployment will become second nature.
+
+There are several popular platforms out there for deploying Flask apps. The top 3 are probably AWS, Google App Engine and Heroku. This article will talk you through the deployment of the most basic Flask app (without any CSS or static files eg images) to Heroku, using a Windows environment. Of course, I am 99.9% confident that your Flask app contains CSS files - however, it is best that you start with the simplest Flask deployment possible and then progress from there.
+
+#### Prerequisites
+- you need to have Git installed, and a basic working knowledge of Git.
+- an installation of `pip`. If you don't have this, you can install `pip` using [these instructions](https://pip.pypa.io/en/stable/installing/). `pip` is installed by default in Python version 2.9 and later. You can check your Python version by opening the Python shell and running
+
+```
+>>> import sys
+>>> sys.version
+'2.7.9 | 64-bit | (default, Jul  1 2015, 03:41:50) [MSC v.1500 64 bit (AMD64)]'
+```
+
+- an installation and working knowledge of `virtualenv`. This can be installed using `pip`:
+
+```
+Documents> pip install virtualenv
+```
+
+- a Heroku account - you can sign up [here](https://signup.heroku.com/). (to be clear, you do not need to pay to deploy a basic Flask app to Heroku, you will not have to pay for anything at any point in this tutorial!).
+- Heroku Toolbelt. This can be downloaded [here](https://toolbelt.heroku.com/). This allows you to connect to your Heroku account via Windows Powershell.
+
+The majority of problems encountered when deploying your first Flask app to Heroku will be caused by problems with `git`, `pip` or `virtualenv`. If you do encounter problems in the steps that follow, it is thoroughly recommended to go back and practice working with `git`, `pip` and `virtualenv` until you really understand them, and are confident in using them.
+
+#### 1. Getting Started
+Navigate to your `Documents` folder in Powershell, and run
+
+```
+Documents> mkdir first_flask_app
+Documents> cd first_flask_app
+Documents/first_flask_app> new-item app.py
+```
+
+We will use the [Flask documentation hello world application](http://flask.pocoo.org/docs/0.10/quickstart/). Put the following content into your `app.py` file:
+
+```
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello World!'
+
+if __name__ == '__main__':
+    app.run()
+``` 
+
+To run the app locally, use the following command:
+
+```
+Documents/first_flask_app> python app.py
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+```
+
+You can then navigate to `http://127.0.0.1:5000/` in your browser to see the 'Hello World' output.
+
+You have now verified that your basic Flask app is running locally, and are ready to deploy to Heroku.
+
+#### 2. Setting up your Virtual Environment
+Next, you need to set up a virtual environment in your project folder. This virtual environment will be used to tell Heroku which Python packages your Flask app needs to use. For example, if your Flask app uses `numpy` to do some numerical processing on the backend, you will need to include `numpy` in your virtual environment. Navigate to the root of your project folder and run:
+
+```
+Documents/first_flask_app> virtualenv venv
+Documents/first_flask_app> cd venv/Scripts
+```
+
+To activate your virtual environment, run:
+
+```
+Documents/first_flask_app/venv/Scripts> .\activate
+```
+
+`(venv)` should now appear at the beginning of your path in Powershell. You can deactivate the virtual environment in Powershell at any time by running `deactivate`.
+
+Now that your virtual environment is activated, you are in a position to install the Python packages that Heroku requires for Flask. The packages required are as follows:
+
+- Flask
+- gunicorn
+- Jinja2
+
+You can install all of these packages with:
+
+```
+Documents/first_flask_app> pip install flask gunicorn jinja2
+```
+
+However, if you encounter error messages while installing these packages then you might have to install each one individually (again, with `pip`), and debug any errors which occur.
+
+#### 3. Create a Procfile (Process File)
+Each Flask app deployed to Heroku requires a Procfile. Navigate to the root of the project and run:
+
+```
+Documents/first_flask_app> new-item Procfile
+``` 
+
+Do *not* make the Procfile a text file. Open the Procfile in an editor (eg Notepad) and paste the following into your Procfile:
+
+```
+web: gunicorn app:app
+```
+
+#### 4. Create a Requirements File
+Heroku recognises the packages used in your Flask app by looking inside the `requirements.txt` file. You create your requirements file using `pip` and `virtualenv`. Running `pip freeze requirements` will display the packages that you have installed in your virtual environment.
+
+```
+Documents/first_flask_app> pip freeze requirements
+Flask==0.10.1
+gunicorn==19.4.5
+itsdangerous==0.2
+Jinja2==2.8
+MarkupSafe==0.23
+Werkzeug==0.11.3
+```
+
+You will note that additional packages (`itsdangerous`, `MarkupSafe` and `Werkzeug`) have been installed. This is because running `pip install flask` automatically installs `itsdangerous` and`Werkzeug`, and running `pip install jinja2` automatically installs `MarkupSafe`.
+
+To save these requirements to your `requirements.txt` file, run `pip freeze > requirements.txt`.
+
+```
+Documents/first_flask_app> pip freeze > requirements.txt
+```
+
+Your `requirements.txt` file will look like this:
+
+```
+Flask==0.10.1
+gunicorn==19.4.5
+itsdangerous==0.24
+Jinja2==2.8
+MarkupSafe==0.23
+Werkzeug==0.11.3
+
+```
+
+*Key Step*: in Windows, your `requirements.txt` file will be in Unicode format by default. What the official Heroku documentation doesn't mention is that the `requirements.txt` file must be saved in `ANSI` format for the Flask app to be deployed to successfully. Open your `requirements.txt` file in an editor (eg Notepad), click 'Save As' and change the encoding to `ANSI`. The following image shows the file after I have updated the encoding:
+
+![save heroku requirements file as ANSI](../static/images/deploying-first-flask-app-to-heroku/requirements_ansi.png)
+
+#### 5. Save your Flask app using Git
+First, create a `.gitignore` file:
+
+```
+Documents/first_flask_app> new-item .gitignore
+```
+
+Open the `.gitignore` file and write `venv`. This will make `git` ignore the `venv` directory - we can do this because Heroku doesn't need to see the `venv` directory - it can get all the information it needs about Python packages from the `requirements.txt` file. Next, initialise your git repository and make a first commit:
+
+```
+Documents/first_flask_app> git init
+Documents/first_flask_app> git add --all
+Documents/first_flask_app> git commit -m "first commit with app ready for deployment"
+```
+
+#### 6. Deploy your app to Heroku
+Login to the Heroku toolbelt using:
+
+```
+Documents/first_flask_app> heroku login
+```
+
+Enter your Heroku email address, username and password in Powershell if prompted. Then run
+
+```
+Documents/first_flask_app> heroku create
+Creating polar-tor-1665... done, stack is cedar-14
+https://polar-tor-1665.herokuapp.com/ | https://git.heroku.com/polar-tor-1665.git
+Git remote heroku added
+heroku-cli: Updating... done.
+```
+
+This creates a Heroku app at `https://polar-tor-1665.herokuapp.com/` and adds a Git remote called `heroku` so that when you push your repository to the `heroku` remote, it will update the app URL. I can view the `heroku` remote in the command line with:
+
+```
+Documents/first_flask_app> git remote -v
+heroku  https://git.heroku.com/polar-tor-1665.git (fetch)
+heroku  https://git.heroku.com/polar-tor-1665.git (push)
+```
+
+To deploy the app to Heroku, run
+
+```
+Documents/first_flask_app> git push heroku master
+```
+
+Depending on your internet connection, your app may take anywhere betwen 15 seconds and 10 minutes (or more!) to upload. The following messages appear in Powershell:
+
+```
+Counting objects: 1523, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (1477/1477), done.
+Writing objects: 100% (1523/1523), 5.79 MiB | 67.00 KiB/s, done.
+Total 1523 (delta 241), reused 0 (delta 0)
+remote: Compressing source files... done.
+remote: Building source:
+remote:
+remote: -----> Python app detected
+remote: -----> Installing runtime (python-2.7.11)
+remote: -----> Installing dependencies with pip
+remote:        Collecting Flask==0.10.1 (from -r requirements.txt (line 1))
+remote:        Downloading Flask-0.10.1.tar.gz (544kB)
+remote:        Collecting gunicorn==19.4.5 (from -r requirements.txt (line 2))
+remote:        Downloading gunicorn-19.4.5-py2.py3-none-any.whl (112kB)
+remote:        Collecting itsdangerous==0.24 (from -r requirements.txt (line 3))
+remote:        Downloading itsdangerous-0.24.tar.gz (46kB)
+remote:        Collecting Jinja2==2.8 (from -r requirements.txt (line 4))
+remote:        Downloading Jinja2-2.8-py2.py3-none-any.whl (263kB)
+remote:        Collecting MarkupSafe==0.23 (from -r requirements.txt (line 5))
+remote:        Downloading MarkupSafe-0.23.tar.gz
+remote:        Collecting Werkzeug==0.11.3 (from -r requirements.txt (line 6))
+remote:        Downloading Werkzeug-0.11.3-py2.py3-none-any.whl (305kB)
+remote:        Installing collected packages: Werkzeug, MarkupSafe, Jinja2, itsdangerous, Flask, gunicorn
+remote:        Running setup.py install for MarkupSafe
+remote:        Running setup.py install for itsdangerous
+remote:        Running setup.py install for Flask
+remote:        Successfully installed Flask-0.10.1 Jinja2-2.8 MarkupSafe-0.23 Werkzeug-0.11.3 gunicorn-19.4.5 itsdangero
+us-0.24
+remote:
+remote: -----> Discovering process types
+remote:        Procfile declares types -> web
+remote:
+remote: -----> Compressing... done, 42.8MB
+remote: -----> Launching...
+remote:        Released v3
+remote:        https://polar-tor-1665.herokuapp.com/ deployed to Heroku
+remote:
+remote: Verifying deploy... done.
+To https://git.heroku.com/polar-tor-1665.git
+ * [new branch]      master -> master
+```
+
+Of course, your app will not be deploying to `polar-tor-1665` like mine - it will be using another app name. You can now visit your app at the designated URL shown in Powershell (mine is `https://polar-tor-1665.herokuapp.com/`).
+
+![flask heroku app live](../static/images/deploying-first-flask-app-to-heroku/flask_app_live.png)
+
+#### 7. Key Tips
+If you are having problems with any of the above steps, then go back and read, re-read and re-read this article. Make sure you are following each step exactly as I show you - you have to be precise. If you are new to any of `git`, `pip` or `virtualenv` then go away and practice them until you understand them more comprehensively and are confident when using them. This will make the process of deploying Flask apps to Heroku quicker and easier.
+
+#### 8. Code
+The code for this project (minus the virtual environment) is available at `https://github.com/lambo477/first_flask_app`.
+
+
+
