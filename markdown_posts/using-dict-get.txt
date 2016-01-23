@@ -1,0 +1,51 @@
+When you first learn Python, accessing the values of a dictionary is as simple as using `dictionary[key]`. For example:
+
+```
+>>> fruit_bowl = {
+...     'apples': 4,
+...     'pears': 3,
+...     'bananas': 7
+... }
+>>> fruit_bowl['apples']
+4
+```
+
+Of course, there is *another* way of accessing dictionary values. You can use the `dict.get()` method:
+
+```
+>>> fruit_bowl.get('apples')
+4
+```
+
+On first viewing, you might think, what is the point in using `.get()`? Is it just alternative syntax for the square-bracket notation?
+
+NO. The `.get(key, default)` method actually allows you to define a default value to use in the case that the dictionary key does not exist.
+
+Let's talk through the various scenarios when using `dict().get()`. Firstly, if you pass in a key that does not exist, the function will return `None`:
+
+```
+>>> fruit_bowl.get('potatoes')
+>>> value = fruit_bowl.get('potatoes')
+>>> value == None
+True
+```
+
+If the key doesn't exist, you may wish to provide a default value: 
+
+```
+>>> fruit_bowl.get('potatoes', 'no potatoes in the fruit bowl')
+'no potatoes in the fruit bowl'
+```
+
+The provision of default values when accessing dictionary values makes your code more robust because it is less likely to throw errors. This is generally considered good practice, but it can make code harder to debug on occasion!
+
+There is, of course, one caveat. `dict.get(key, default)` always evaluates the `default` value before trying to access the dictionary `key`. This means that the function *can* throw an error *even if the key exists*. For example:
+
+```
+>>> value = fruit_bowl.get('pears', fruit_bowl['potatoes'])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 'potatoes'
+```
+
+In the above example, the `'pears'` key exists in `fruit_bowl`, but `.get()` tries to evaluate the default value `fruit_bowl['potatoes']` first, which throws an error.
