@@ -45,14 +45,12 @@ Before Python 2.6, people would often add or subtract from the `idx` value gener
 Now, instead of doing this, you can simply pass an optional `start` parameter to `enumerate`:
 
 ```
->>> my_list
-['apples', 'bananas', 'pears']
 >>> for idx, value in enumerate(my_list, 1):
-...     print(index, value)
+...         print(idx, value)
 ...
-(2, 'apples')
+(1, 'apples')
 (2, 'bananas')
-(2, 'pears')
+(3, 'pears')
 ```
 
 Neat!
