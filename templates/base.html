@@ -5,13 +5,26 @@
 	<head>
 		<!-- for Bing -->
 		<meta name="msvalidate.01" content="3102BB80C73F481C5225957498746548" />
+		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- STYLING -->
 		<title>{% block title %}{% endblock %}</title>
 		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{% static 'css/normalise.css' %}">
 		<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+		<!-- META -->
+		<meta name="keywords" content="{% block meta_keywords %}{% endblock meta_keywords %}">
+		<meta name="description" content="{% block meta_description %}{% endblock meta_description %}">
+		<meta name="author" content="George Lambert">
+		<meta name="robots" context="index, follow">
+
+		<!-- Jquery -->
 		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+		<!-- Google Analytics -->
 		{% if google_analytics_tag %}
 			<script>
 			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -24,6 +37,8 @@
 
 			</script>
 		{% endif %}
+
+		<!-- Custonm Header Content -->
 		{% block custom-head-content %}{% endblock %}
 	</head>
 	<body>
