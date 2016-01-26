@@ -1,36 +1,36 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 	
-	{% load markdown_support %}
+{% load markdown_support %}
 
-	{% block meta_keywords %}{{ specific_post.meta_keywords }}{% endblock meta_keywords %}
-	{% block meta_description %}{{ specific_post.meta_description }}{% endblock meta_description %}
-	{% block title %}{{ specific_post.title }} | George Lambert{% endblock title %}
+{% block meta_keywords %}{{ specific_post.meta_keywords }}{% endblock meta_keywords %}
+{% block meta_description %}{{ specific_post.meta_description }}{% endblock meta_description %}
+{% block title %}{{ specific_post.title }} | George Lambert{% endblock title %}
 
-	{% block header-content %}
-		<h2>{{ specific_post.title }}</h2>
-		<span class="date">{{ specific_post.created_on|date:"d M Y" }}</span>
-	{% endblock header-content %}
+{% block header-content %}
+	<h2>{{ specific_post.title }}</h2>
+	<span class="date">{{ specific_post.created_on|date:"d M Y" }}</span>
+{% endblock header-content %}
 
-	{% block main-content %}
-		{{ specific_post.text|custom_markdown }}
-	{% endblock main-content %}
+{% block main-content %}
+	{{ specific_post.text|custom_markdown }}
+{% endblock main-content %}
 
-	{% block custom-head-content %}
-		{% if specific_post.custom_css %}
-			<link rel="stylesheet" href="{% static specific_post.custom_css %}">
-		{% endif %}
-	{% endblock custom-head-content %}
+{% block custom-head-content %}
+	{% if specific_post.custom_css %}
+		<link rel="stylesheet" href="{% static specific_post.custom_css %}">
+	{% endif %}
+{% endblock custom-head-content %}
 
-	{% block custom-closing-body-script-reference %}
-		{% if specific_post.custom_closing_body_script_reference %}
-			<script src="{% static specific_post.custom_closing_body_script_reference %}"></script>
-		{% endif %}
-	{% endblock custom-closing-body-script-reference %}
+{% block custom-closing-body-script-reference %}
+	{% if specific_post.custom_closing_body_script_reference %}
+		<script src="{% static specific_post.custom_closing_body_script_reference %}"></script>
+	{% endif %}
+{% endblock custom-closing-body-script-reference %}
 
-	{% block custom-closing-body-script %}
-		{% if specific_post.custom_closing_body_script %}
-			<script src="{% static specific_post.custom_closing_body_script %}">
-			</script>
-		{% endif %}
-	{% endblock custom-closing-body-script %}
+{% block custom-closing-body-script %}
+	{% if specific_post.custom_closing_body_script %}
+		<script src="{% static specific_post.custom_closing_body_script %}">
+		</script>
+	{% endif %}
+{% endblock custom-closing-body-script %}

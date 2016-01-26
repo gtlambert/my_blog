@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.syndication.views import Feed
+from django.core.urlresolvers import reverse
 
 
 class Post(models.Model):
@@ -16,43 +18,19 @@ class Post(models.Model):
     def __unicode__(self):
         return self.title
 
-
-class ProjectCategory(models.Model):
-    category = models.CharField(max_length=100)
-
-    def __unicode__(self):
-        return self.category
+    def get_absolute_url(self):
+        return reverse('view-post', kwargs={'slug': self.slug})
 
 
-class Project(models.Model):
-    title = models.CharField(max_length=100)
-    tagline = models.TextField(max_length=1000)
-    category = models.ForeignKey(ProjectCategory)
+class LatestPosts(Feed):
+    title = "Latest Posts"
+    link = "/"
 
-    def __unicode__(self):
-        return self.title + ", " + self.category
+    def items(self):
+        return Post.objects.all()
 
+    def item_title(self, item):
+        return item.title
 
-class Language(models.Model):
-    name = models.CharField(max_length=100)
-    start_date = models.DateField()
-    image_path = models.CharField(max_length=100) # will this need to be markdown using template tag filter?
-
-    def __unicode__(self):
-        return self.name
-
-
-class LanguageCategory(models.Model):
-    name = models.CharField(max_length=100)
-    parent_language = models.ForeignKey(Language)
-
-    def __unicode__(self):
-        return self.name
-
-
-class LanguageModule(models.Model):
-    name = models.CharField(max_length=100)
-    parent_language_category = models.ForeignKey(LanguageCategory)
-
-    def __unicode__(self):
-        return self.name
+    def item_description(self, item):
+        return item.text
