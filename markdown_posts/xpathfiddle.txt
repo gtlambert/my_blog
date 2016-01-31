@@ -1,0 +1,12 @@
+Today I launched a new XPath tester called [XPathFiddle](http://www.xpathfiddle.net). XPathFiddle is a client-side web application which can be used to evaluate XPath expressions against XML content in real time. Unlike other online XPath testers, it does not require interaction with the server - all expressions are evaluated using JavaScript as the user types. 
+
+In time, I hope that [XPathFiddle](http://www.xpathfiddle.net) will become the go-to destination for developers wishing to test and share XPath expressions tested against sample XML content, in the same way that [JSFiddle](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjQqrOBl9XKAhXDwBQKHawiDssQFggcMAA&url=https%3A%2F%2Fjsfiddle.net%2F&usg=AFQjCNG_F3aAJtbhXPgB5wF-trLPGbllUw&sig2=-_fIndpAo1t4F0yEHn-vmw&bvm=bv.113034660,d.ZWU), [Pythex](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwil1dmIl9XKAhWENxQKHWUkDg0QFggcMAA&url=http%3A%2F%2Fpythex.org%2F&usg=AFQjCNFK6gtl76uedoetgjhnRf6JGMBqrA&sig2=z4UZLb4gxzcrrqYaYsiWPQ&bvm=bv.113034660,d.ZWU) and [Sassmeister](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&sqi=2&ved=0ahUKEwiA8fyOl9XKAhVC6RoKHUaOBeIQFggcMAA&url=http%3A%2F%2Fwww.sassmeister.com%2F&usg=AFQjCNG3-DDHO_Y6dCpccp1trJv0FSQ6dA&sig2=o9u4wCeG3ODbQGEp32NuLw&bvm=bv.113034660,d.ZWU) have snuck onto my favorites toolbar!
+
+There is still *plenty* of work to be done with XPathFiddle. Plans for the future include:
+
+* the option to test XPath expressions for different versions of XPath.
+* the ability to save and share XPathFiddles.
+* a reference section.
+* much, much more.
+
+Anyway, [check it out](http://www.xpathfiddle.net).
