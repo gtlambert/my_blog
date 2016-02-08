@@ -1,0 +1,117 @@
+As you become a more competent Django developer, it becomes increasingly important to be able to manage your project settings in an efficient and consistent manner. If you have reached the stage where you are deploying a project to Heroku on a regular basis, but you still only have one `settings.py` file then read on - this article is for you.
+
+
+#### Moving your settings file
+The first thing to note is that you have more control over your `settings.py` file than you might think. If I navigate to my `Documents` folder and run `django-admin startproject test_project` to create a new project, it creates the following directory structure:
+
+```
+Documents
+  --test_project
+    --manage.py
+    --test_project
+      --__init__.py
+      --urls.py
+      --wsgi.py
+      --settings.py
+```
+
+You can move your `settings.py` file to a more convenient location if you wish. For example, you could move it to the project root directory. If you do this, you need to tell Django where to look for the `settings.py` file with the `--settings` option whenever you run a command involving `manage.py`. For example:
+
+```
+Documents> python manage.py runserver --settings=settings
+```
+
+or
+
+```
+Documents> python manage.py makemigrations --settings=settings
+```
+
+Another option that is frequently used is to hold your `settings.py` file in a `settings` directory. In this case, the above commands would become:
+
+```
+Documents> python manage.py runserver --settings=settings.settings
+```
+
+and
+
+```
+Documents> python manage.py makemigrations --settings=settings.settings
+```
+
+You also need to remember to include an empty `__init__.py` file in your `settings` folder.
+
+Of course, adding the `--settings` option to each command you run quickly becomes frustrating. To avoid this, you can change the `DJANGO_SETTINGS_MODULE` environment variable in the `manage.py` file from `os.environ.setdefault("DJANGO_SETTINGS_MODULE", "test_project.settings")` to the relevant file location.
+
+**Note**: you can also change the location of your `urls.py` file by altering the `ROOT_URLCONF` variable in your settings file.
+
+#### Multiple settings files
+The next thing to note is that for almost Django projects you should be working with multiple settings files. This allows you to automatically change between files when working in development or production. For example, in development you will work with `DEBUG = True`, but in production you will have `DEBUG = True`, for obvious security reasons. You may also wish to specify:
+
+* different database options for development and production environments
+* visitor tracking settings for your production environments (eg a Google Analytics flag)
+* alternative static file settings
+
+We generally work with a minimum of four settings files. Taking a basic implementation from the excellent [Two Scoops of Django](https://www.twoscoopspress.com/products/two-scoops-of-django-1-8), we use a settings file for......
+
+* our local environment - `local.py`
+* our staging environment - `staging.py`
+* our production environment - `production.py`
+
+Since the majority of the content of each of these files is the same, we put all of the repeated code in a `base.py` settings file, and use the dreaded-but-OK-in-this-case `from base import *` in each of `local.py`, `staging.py` and `production.py`.  
+
+These files can be placed in a `settings` directory so that the project structure looks as follows:
+
+```
+Documents
+  --test_project
+    --manage.py
+    --test_project
+      --__init__.py
+      --urls.py
+      --wsgi.py
+    --settings
+      --__init__.py
+      --base.py
+      --local.py
+      --staging.py
+      --production.py 
+```
+
+The majority of the settings are held in `base.py`. For this blog, my `local.py` file currently has:
+
+```
+from base import *
+
+DEBUG = True
+GOOGLE_ANALYTICS_TAG = 0
+```
+
+My `production.py` file looks like this...
+
+```
+from base import *
+
+DEBUG = False
+GOOGLE_ANALYTICS_TAG = 1
+```
+
+As you can see - they are pretty basic - most of the content is held in `base.py`. The `staging.py` file is generally the same as `production.py`, but if I need to make a change to my production settings then I will always make the change in `staging.py` and thoroughly test it in my staging environment before making the change in `production.py`.
+
+#### Multiple settings files with Heroku
+By default, Heroku will load the settings file defined by `os.environ.setdefault("DJANGO_SETTINGS_MODULE", "path/to/settings/file/here")` in your `manage.py` file. However, you can easily override this by setting a [Heroku configuration variable](https://devcenter.heroku.com/articles/config-vars). Navigate to your project directory and use:
+
+```
+heroku config:set DJANGO_SETTINGS_MODULE=settings.production
+```
+
+This will load `settings/production.py` as the settings file. You can check that the correct file is being loaded by viewing the Heroku configuration variables with `heroku config`.
+
+#### Multiple settings files and environments with Heroku
+If you have separate environments (eg staging and production) in different Heroku apps, then you will need to specify which app uses which settings file. For simplicity/clarity, we will assume that the apps are called `staging_app` and `production_app`. You could then set the correct Heroku configuration variables using:
+
+```
+heroku config:set DJANGO_SETTINGS_MODULE=settings.production --app production_app
+heroku config:set DJANGO_SETTINGS_MODULE=settings.staging --app staging_app
+```
+
