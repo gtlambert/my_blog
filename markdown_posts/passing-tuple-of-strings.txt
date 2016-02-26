@@ -1,0 +1,82 @@
+If you have reached beyond Python basics then you will know that you can test for the existence of a substring in a string by using the `in` keyword. For example:
+
+```
+In [2]: a = 'apples and pears'
+
+In [3]: b = 'and'
+
+In [4]: b in a
+Out[4]: True
+```
+
+If you have a list or tuple of strings and you want to test for the existence of any or all of these strings in another string, you can wrap a list comprehension with the built-in `any` or `all` functions as follows:
+
+```
+In [10]: my_list = ['apples', 'bananas', 'pears']
+
+In [11]: my_string = 'apples and pears'
+
+In [12]: any([substr in my_string for substr in my_list])
+Out[12]: True
+
+In [13]: all([substr in my_string for substr in my_list])
+Out[13]: False
+``` 
+
+To me, this always seemed like a relatively intuitive way of testing for the existence of an iterable of substrings in a string. That was until I discovered you can pass a tuple of strings to `str.startswith()` and `str.endswith()`. 
+
+First of all, consider the normal usage of `str.startswith()` and `str.endswith()`:
+
+```
+In [14]: a = 'apples and pears'
+
+In [15]: b = 'apple'
+
+In [16]: a.startswith(b)
+Out[16]: True
+
+In [17]: a.endswith(b)
+Out[17]: False
+```
+
+`str.startswith()` and `str.endswith()` also take optional *start* and *end* parameters, which tells the function to test `str` beginning at *start* and stopping at *end*:
+
+```
+In [22]: a.startswith(b, 1)
+Out[22]: False
+
+In [23]: a.startswith(b, 0, 3)
+Out[23]: False
+
+In [24]: a.startswith(b, 0, len(a)-1)
+Out[24]: True
+```
+
+As I recently found out, you can also **pass a tuple of strings to `str.startswith` and `str.endswith`**. For example:
+
+```
+In [29]: a = 'apples and pears'
+
+In [30]: b = ('apples', 'bananas', 'oranges')
+
+In [31]: a.startswith(b)
+Out[31]: True
+
+In [32]: a.endswith(b)
+Out[32]: False
+```
+
+This is an excellent feature of Python. However, it leaves me thinking that the Python method for testing for a tuple of strings in another string is no longer Pythonic. 
+
+Suddenly....
+
+```
+any([substr in string for substr in list_of_subtrs])
+all([substr in string for substr in list_of_subtrs])
+```
+
+...don't look nearly as pretty, or Pythonic. 
+
+As far as I am aware, there is no way of shortcutting this. `tuple_of_substrs in string` and `list_of_substrs in string` both obviously generate errors, and rightly so. But wouldn't it be nice if there was a Pythonic way of testing for a tuple of substrings in a string, as with `str.startswith()` and `str.endswith()`?
+
+Last time somebody asked me what I don't like about Python I didn't have anything to say - now I have my answer!

@@ -1,6 +1,9 @@
 html, body {
   width: 100%; }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif !important; }
+
 .main-container {
   background-color: white;
   width: 95%;
@@ -9,11 +12,9 @@ html, body {
   height: 100%;
   font-family: 'Montserrat', sans-serif; }
   .main-container header {
-    height: 80px;
     text-align: center;
     width: 100%; }
     .main-container header div.main-header {
-      height: 40%;
       width: 100%;
       margin: auto 0; }
       .main-container header div.main-header ul {
@@ -72,6 +73,9 @@ html, body {
     padding: 14px;
     margin: 30px 0;
     border-radius: 3px; }
+    .main-container .main-content pre code {
+      background-color: #eaeaea;
+      border: none; }
   .main-container .main-content img {
     max-width: 90%;
     margin: 30px auto;

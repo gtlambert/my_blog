@@ -12,6 +12,7 @@
 		<title>{% block title %}{% endblock %}</title>
 		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{% static 'css/normalise.css' %}">
+		<link rel="stylesheet" href="{% static 'bower_components/foundation/css/foundation.min.css' %}">
 		<link rel="stylesheet" href="{% static 'css/main.css' %}">
 
 		<!-- META -->
@@ -43,13 +44,13 @@
 	</head>
 	<body>
 		<div class="main-container">
-			<header>
+			<header class="row">
 				<div class="main-header">
 				{% block header-content %}{% endblock %}
 				</div>
 			</header>
 			<hr>
-			<div class="main-content">
+			<div class=" row main-content">
 				{% block main-content %}{% endblock %}
 			</div>
 			<div class="clearfix">

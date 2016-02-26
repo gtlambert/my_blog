@@ -4,6 +4,10 @@ html, body {
 	width: 100%;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Montserrat', sans-serif !important;
+}
+
 .main-container {
 	background-color: white;
 	width: 95%;
@@ -13,14 +17,14 @@ html, body {
 	font-family: 'Montserrat', sans-serif;
 
 	header {
-		height: $header-height;
 		text-align: center;
 		width: 100%;
 
 		div.main-header {
-			height: 40%;
 			width: 100%;
 			margin: auto 0;
+
+
 
 			ul {
 				margin: 0 auto;
@@ -114,6 +118,11 @@ html, body {
 			padding: 14px;
 			margin: 30px 0;
 			border-radius: 3px;
+
+			code {
+				background-color: #eaeaea;
+				border: none;
+			}
 		}
 
 		img {
