@@ -1,0 +1,56 @@
+So, you've got a Python `datetime` object and you want to convert it to a string. Until now, I had **always** used the Python `strftime()` function:
+
+```
+In [95]: import datetime
+
+In [96]: now = datetime.datetime.now()
+
+In [97]: now
+Out[97]: datetime.datetime(2016, 3, 4, 21, 57, 14, 95000)
+
+In [98]: now.strftime('%d-%B-%Y')
+Out[98]: '04-March-2016'
+```
+
+This is fine, of course, but I find it frustrating that I can never remember the string format to use, and always have to look it up in either the [documentation](https://docs.python.org/2/library/time.html) or somewhere like [Strftime](http://strftime.org/).
+
+Only recently, I found that there is in fact a more readable and easy to remember way of converting `datetime` objects to strings. This is through the use of format strings:
+
+```
+In [102]: import datetime
+
+In [103]: now = datetime.datetime.now()
+
+In [104]: now
+Out[104]: datetime.datetime(2016, 3, 4, 22, 2, 18, 510000)
+
+In [105]: '{d.day}-{d.month}-{d.year}'.format(d=now)
+Out[105]: '4-3-2016'
+```
+
+Of course, you can also extend this to output the time as well:
+
+```
+In [124]: import datetime
+
+In [125]: now = datetime.datetime.now()
+
+In [126]: '{d.month}/{d.day}/{d.year} {d.hour}:{d.minute}:{d.second}'.format(d=now)
+Out[126]: '3/4/2016 22:8:49'
+```
+
+This if fine, but you may want to add zero padding to both the hour, minute and second fields. You can do this as follows:
+
+```
+In [128]: '{d.month}/{d.day}/{d.year} {d.hour:02}:{d.minute:02}:{d.second:02}'.format(d=now)
+Out[128]: '3/4/2016 22:11:38'
+```
+
+The last thing that you might also want to implement is a 12-hour clock, with `AM` or `PM` specified after the time. You can do this as follows:
+
+```
+In [130]: '{d.month}/{d.day}/{d.year} {d:%I}:{d.minute:02}:{d.second:02}{d:%p}'.format(d=now)
+Out[130]: '3/4/2016 10:11:38PM'
+```
+
+Of course, when you reach this stage, most people would argue that you might as well just be using `strftime()`, and they are probably right. However, I still think that the basic implementation of this `datetime` to string methodology is pretty neat, and I intend to use it in the future!
