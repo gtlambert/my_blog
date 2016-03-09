@@ -8,6 +8,8 @@
 	{% block title %}{{ specific_post.title }} | George Lambert{% endblock title %}
 
 	{% block header-content %}
+		{{ block.super }}
+		<hr>
 		<h2>{{ specific_post.title }}</h2>
 		<span class="date">{{ specific_post.created_on|date:"d M Y" }}</span>
 	{% endblock header-content %}

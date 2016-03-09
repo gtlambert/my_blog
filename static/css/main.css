@@ -7,7 +7,7 @@ h1, h2, h3, h4, h5, h6 {
 .main-container {
   background-color: white;
   width: 95%;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   height: 100%;
   font-family: 'Montserrat', sans-serif; }
@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5, h6 {
         .main-container header div.main-header ul li {
           margin: auto 0;
           display: box;
-          width: 25%;
+          width: 20%;
           text-align: center;
           float: left;
           box-sizing: border-box; }
@@ -118,5 +118,34 @@ h1, h2, h3, h4, h5, h6 {
 
 div.clearfix {
   clear: both; }
+
+#munch {
+  margin: 50px auto;
+  display: block;
+  height: auto;
+  width: 100px;
+  border-radius: 20%;
+  border: 2px solid; }
+
+hr {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  border-width: 0.5px; }
+
+.icon {
+  width: 40px;
+  height: auto;
+  transition: transform .4s ease-out;
+  transform-origin: 50% 50%; }
+
+.email:hover,
+.google-plus:hover,
+.stack-overflow:hover {
+  transform: scale(1.2) rotate(25deg); }
+
+.github:hover,
+.linkedin:hover {
+  transform: scale(1.2) rotate(-25deg); }
 
 /*# sourceMappingURL=main.css.map */
