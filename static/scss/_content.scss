@@ -193,7 +193,12 @@ div.clearfix {
 	height: auto;
 	width: 100px;
 	border-radius: 20%;
-	border: 2px solid ;
+	transition: box-shadow 0.5s;
+	
+	&:hover {
+		// outline: 4px solid black;	
+		box-shadow: 0 0 0 4px #ddd;
+	}
 }
 
 hr {
