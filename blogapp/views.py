@@ -12,6 +12,10 @@ def home(request):
     return render(request, 'index.html', context=context_dict)
 
 
+def tech_stack(request):
+    return render(request, 'tech-stack.html')
+
+
 def view_post(request, slug):
     specific_post = Post.objects.get(slug=slug)
     all_posts = Post.objects.all()
@@ -20,7 +24,3 @@ def view_post(request, slug):
                     'all_posts': all_posts
                     }
     return render(request, 'view_post.html', context=context_dict)
-
-def about(request):
-    context_dict = {}
-    return render(request, 'about.html', context=context_dict)

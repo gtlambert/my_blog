@@ -4,8 +4,7 @@
 <html>
 	<head>
 		<!-- for Bing -->
-		<meta name="msvalidate.01" content="3102BB80C73F481C5225957498746548" />
-		
+		<meta name="msvalidate.01" content="3102BB80C73F481C5225957498746548"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<!-- STYLING -->
@@ -22,9 +21,13 @@
 		<meta name="author" content="George Lambert">
 		<meta name="robots" context="index, follow">
 
-		<!-- Jquery -->
-		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<!-- Plugins -->
+		<script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+		<script src="{% static 'bower_components/Chart.js/Chart.min.js' %}"></script>
+		<script src="{% static 'bower_components/Chart.HorizontalBar.js/Chart.HorizontalBar.js' %}"></script>
+
+		<!-- JS -->
+		<script src="{% static 'js/app.js' %}"></script>
 
 		<!-- Google Analytics -->
 		{% if google_analytics_tag %}
@@ -63,13 +66,23 @@
 				</div>
 			</header>
 			<hr>
+			
 			<div class=" row main-content">
 				{% block main-content %}{% endblock %}
 			</div>
 			<div class="clearfix">
 			</div>
 			<hr>
-			<footer class="text-center">&copy; George Lambert</footer>
+			<footer class="text-center">
+				<ul>
+					<li><a href="{% url 'tech-stack' %}">My Stack</a></li>
+				</ul>
+				<div class="clearfix"></div>
+				<hr>
+				<p>&copy; George Lambert</p>
+				
+
+			</footer>
 		</div>
 		{% block custom-closing-body-script-reference %}{% endblock %}
 		{% block custom-closing-body-script %}{% endblock %}

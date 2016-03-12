@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block header-content %}
+	{{ block.super }}
+	<hr>
+	<h2>My Tech Stack</h2>
+	<!-- <span class="date">{{ specific_post.created_on|date:"d M Y" }}</span> -->
+{% endblock header-content %}
+
+{% block main-content %}
+	<div class="row">
+		<h2 class="text-center">Backend</h2>
+		<canvas class="graph" id="backend"></canvas>
+	</div>
+	<br>
+	<br>
+	
+	<div class="row">
+		<h2 class="text-center">Frontend</h2>
+		<canvas class="graph" id="frontend"></canvas>
+	</div>
+	<!-- <div class="row">
+		<h2>Dev Tools</h2>
+	</div>
+	<div class="row">
+		<h2>Deployment</h2>
+	</div> -->
+	<div id="chartjs-tooltip"></div>
+{% endblock main-content %}
