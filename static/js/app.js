@@ -159,8 +159,13 @@ Chart.defaults.global = {
     onAnimationComplete: function(){}
 }
 
-var backendData = {
-    labels: [ "Ruby", "Python", "Django", "Flask", "C++"],
+var data = {
+    labels: ['Heroku', '            Google App Engine', 'AWS',
+             'Git', 'GitHub', 'Bitbucket', 'Gulp', 'Grunt',
+             'SQL', 'MongoDB',
+             
+             'JavaScript', 'AngularJS', 'Sass', 'CSS', 'HTML5', 'Bootstrap', 'Foundation',
+             'Ruby', "Python", "Django", "Flask", "C++"],
     datasets: [
         {
             label: "Backend",
@@ -168,27 +173,22 @@ var backendData = {
             strokeColor: "rgba(255,153,0,0.5)",
             highlightFill: "rgba(255,153,0,0.8)",
             highlightStroke: "rgba(255,153,0,0.8)",
-            data: [17, 84, 45, 28, 33]
+            data: [50, 10, 10,
+            63, 57, 45, 67, 22,
+                   15, 15,
+                   
+                   40, 60, 36, 44, 45, 35, 47,
+                   17, 84, 45, 28, 33]
         }
     ]
 };
 
-var frontendData = {
-	labels: ['JavaScript', 'AngularJS', 'Sass', 'CSS', 'HTML5', 'Bootstrap', 'Foundation'],
-	datasets: [
-		{
-			label: "Frontend",
-			fillColor: "rgba(100,149,237,0.5)",
-			strokeColor: "rgba(100,149,237,0.5)",
-			highlightFill: "rgba(100,149,237,0.8)",
-			highlightStroke: "rgba(100,149,237,0.8)",
-			data: [40, 60, 36, 44, 45, 35, 47]
-		}
-	]
-}
-
-Chart.defaults.global.pointHitDetectionRadius = 1;
+Chart.defaults.global.pointHitDetectionRadius = 5;
     Chart.defaults.global.customTooltips = function(tooltip) {
+        console.log('in the tooltip function');
+
+        if (tooltip.value === null)
+            throw ''
 
         var tooltipEl = $('#chartjs-tooltip');
 
@@ -202,73 +202,92 @@ Chart.defaults.global.pointHitDetectionRadius = 1;
         tooltipEl.removeClass('above below');
         tooltipEl.addClass(tooltip.yAlign);
    
-        
-
         console.log('the tooltip is');
         console.log(tooltip);
         console.log('the tooltip text is');
         console.log(tooltip.text);
-        if (tooltip.text.startsWith('Python')) {
-        	console.log('starts with python');
+        if (tooltip.text.replace(/ /g,'').startsWith('Python')) {
         	content = '<h4 class="text-center">Python</h4><br>' +
         			  '<p><strong>Maths:</strong> NumPy, Pandas, SciPy, matplotlib<br>' +
         			  '<strong>Scraping:</strong> lxml, Scrapy, BeautifulSoup, XPath, PyQuery<br>' + 
         			  '<strong>Testing</strong>: Selenium, PhantomJS<br>' +
         			  '<strong>Web Frameworks:</strong> Django, Flask<br>' +
         			  '<strong>Stack Overflow:</strong> Silver badge holder';
-        } else if (tooltip.text.startsWith('Ruby')) {
-        	console.log('starts with Ruby');
+        } else if (tooltip.text.replace(/ /g,'').startsWith('Ruby')) {
         	content = '<h4 class="text-center">Ruby</h4><br>' +
         			  '<p>I just know the basics!</p>';
-        } else if (tooltip.text.startsWith('Django')) {
-        	console.log('starts with Django');
+        } else if (tooltip.text.replace(/ /g,'').startsWith('Django')) {
         	content = '<h4 class="text-center">Django</h4><br>' + 
         			  '<p>Over a year of industry experience</p>';
-        } else if (tooltip.text.startsWith('Flask')) {
-        	console.log('starts with Flask');
+        } else if (tooltip.text.replace(/ /g,'').startsWith('Flask')) {
         	content = '<h4 class="text-center">Flask</h4><br>' +
-        		      '<p>Spent about 3 months learning Flask on<br>' +
+        		      '<p>Spent about 3 months learning Flask on ' +
         			  'the way to learning Django</p>';
-        } else if (tooltip.text.startsWith('C++')) {
-        	console.log('starts with C++');
+        } else if (tooltip.text.replace(/ /g,'').startsWith('C++')) {
         	content = '<h4 class="text-center">C++</h4><br>' + 
-        			  '<p>A year of intensive use while studying<br>' + 
+        			  '<p>A year of intensive use while studying ' + 
         			  'for an MSc at Imperial</p>';
-        } else if (tooltip.text.startsWith('AngularJS')) {
-        	console.log('starts with AngularJS');
+        } else if (tooltip.text.replace(/ /g,'').startsWith('AngularJS')) {
         	content = '<h4 class="text-center">AngularJS</h4><br>' + 
         			   '<p>6 months of industry use.<br>' + 
-        			   '<strong>Plugins:</strong> ui-grid, text angular,<br>' +
+        			   '<strong>Plugins:</strong> ui-grid, text angular, ' +
         			   'Angular file uploader, ui-select, anguautocomplete-alt</p>';
-        } else if (tooltip.text.startsWith('JavaScript')) {
-        	console.log('starts with JavaScript');
+        } else if (tooltip.text.replace(/ /g,'').startsWith('JavaScript')) {
         	content = '<h4 class="text-center">JavaScript</h4><br>' +
         			  '<p>A year of experience.<br>' + 
         			  '<strong>Frameworks:</strong> JQuery, AngularJS<br>' +
-        			  '<strong>Plugins:</strong> Chart.js, JQuery layout, ui-grid,<br>'+
+        			  '<strong>Plugins:</strong> Chart.js, JQuery layout, ui-grid, '+
         			  'ui-select, Text Angular, anguautocomplete-alt</p>'; 
-        } else if (tooltip.text.startsWith('Sass')) {
-        	console.log('starts with Sass');
+        } else if (tooltip.text.replace(/ /g,'').startsWith('Sass')) {
         	content = '<h4 class="text-center">Sass</h4><br>' + 
-        			  '<p>I use this to speed up my styling,<br>' + 
+        			  '<p>I use this to speed up my styling, ' + 
         			  'but this isn\'t where I focus my time.</p>';
-        } else if (tooltip.text.startsWith('HTML')) {
-        	console.log('starts with html');
+        } else if (tooltip.text.replace(/ /g,'').startsWith('HTML')) {
         	content = '<h4 class="text-center">HTML5</h4><br>' + 
         			  '<p>18 months of regular use</p>';
-        } else if (tooltip.text.startsWith('CSS')) {
-        	console.log('starts with CSS');
+        } else if (tooltip.text.replace(/ /g,'').startsWith('CSS')) {
         	content = '<h4 class="text-center">CSS</h4><br>' + 
         	          '<p>Getting better every day!</p>';
-        } else if (tooltip.text.startsWith('Bootstrap')) {
-        	console.log('starts with Bootstrap');
+        } else if (tooltip.text.replace(/ /g,'').startsWith('Bootstrap')) {
         	content = '<h4 class="text-center">Bootstrap</h4><br>' + 
         			  '<p>I enjoy using Bootstrap, but lack experience</p>';
-        } else if (tooltip.text.startsWith('Foundation')) {
-        	console.log('starts with Foundation');
+        } else if (tooltip.text.replace(/ /g,'').startsWith('Foundation')) {
         	content = '<h4 class="text-center">Foundation</h4><br>' +
         			  '<p>My styling framework of choice</p>';
-        }	
+        } else if (tooltip.text.replace(/ /g,'').startsWith('AWS')) {
+            content = '<h4 class="text-center">AWS</h4><br>' + 
+                       '<p>I know the basics</p>';
+        } else if (tooltip.text.replace(/ /g,'').startsWith('Google')) {
+            content = '<h4 class="text-center">Google App Engine</h4><br>' + 
+                      '<p>Haven\'t got too much past "Hello World" ' + 
+                      'apps in Django and Flask</p>';            
+        } else if (tooltip.text.replace(/ /g,'').startsWith('Heroku')) {
+            content = '<h4 class="text-center">Heroku</h4><br>' + 
+                      '<p>My go to PaaS provider. I\'ve used ' + 
+                      'Heroku for multiple work and personal Django ' +
+                      'and Flask projects for over a year</p>'
+        } else if (tooltip.text.replace(/ /g,'').startsWith('GitH')) {
+            content = '<h4 class="text-center">GitHub</h4><br>' + 
+                      '<p>My go to repository hosting service for both work and personal projects</p>';
+        } else if (tooltip.text.replace(/ /g,'').startsWith('Git')) {
+            content = '<h4 class="text-center">Git</h4><br>' + 
+                      '<p>100% confident using Git as my VCS.</p>'
+        } else if (tooltip.text.replace(/ /g,'').startsWith('Bitbucket')) {
+            content = '<h4 class="text-center">Bitbucket</h4><br>' + 
+                      '<p>The repository hosting service I use if I need something free and private!</p>';
+        } else if (tooltip.text.replace(/ /g,'').startsWith('Gulp')) {
+            content = '<h4 class="text-center">Gulp</h4><br>' + 
+                      '<p>My go to task runner.</p>';
+        } else if (tooltip.text.replace(/ /g,'').startsWith('Grunt')) {
+            content = '<h4 class="text-center">Grunt</h4><br>' + 
+                      '<p>Not my first choice task runner, but I use it in projects set up by Grunters</p>';
+        } else if (tooltip.text.replace(/ /g,'').startsWith('SQL')) {
+            content = '<h4 class="text-center">SQL</h4><br>' +
+                      '<p>I know the CRUD and querying basics, but usually use a Python hook - either Django or Flask with PostgreSQL</p>';
+        } else if (tooltip.text.replace(/ /g,'').startsWith('MongoDB')) {
+            content = '<h4 class="text-center">MongoDB</h4><br>' +
+                      '<p>I know the CRUD and querying basics, but usually use a Python hook - either Django or Flask with PostgreSQL</p>'
+        }
 
         var innerHtml = '<div>' + content + '</div>';
 		tooltipEl.html(innerHtml);
@@ -284,9 +303,39 @@ Chart.defaults.global.pointHitDetectionRadius = 1;
     };
 
 $(document).ready(function() {
-	var backend = document.getElementById("backend").getContext("2d");
-	var backendChart = new Chart(backend).Bar(backendData, options);	
+	var graph = document.getElementById("graph").getContext("2d");
+	var graphChart = new Chart(graph).HorizontalBar(data, options);	
+    for (var idx = 0; idx < graphChart.datasets[0].bars.length; idx++) {
 
-	var frontend = document.getElementById("frontend").getContext("2d");
-	var frontendChart = new Chart(frontend).Bar(frontendData, options);
+        if (idx <= data.labels.indexOf('AWS')) {
+            graphChart.datasets[0].bars[idx].fillColor = "rgba(192,192,192,0.5)";
+            graphChart.datasets[0].bars[idx].strokeColor = "rgba(192,192,192,0.5)";
+            graphChart.datasets[0].bars[idx].highlightFill = "rgba(192,192,192,0.8)";
+            graphChart.datasets[0].bars[idx].highlightStroke = "rgba(192,192,192,0.8)";
+        } else if (idx <= data.labels.indexOf('Grunt')) {
+            graphChart.datasets[0].bars[idx].fillColor = "rgba(100,149,237,0.5)";
+            graphChart.datasets[0].bars[idx].strokeColor = "rgba(100,149,237,0.5)";
+            graphChart.datasets[0].bars[idx].highlightFill = "rgba(100,149,237,0.8)";
+            graphChart.datasets[0].bars[idx].highlightStroke = "rgba(100,149,237,0.8)";
+        } else if (idx <= data.labels.indexOf('MongoDB')) {
+            graphChart.datasets[0].bars[idx].fillColor = "rgba(0,204,102,0.5)";
+            graphChart.datasets[0].bars[idx].strokeColor = "rgba(0,204,102,0.5)";
+            graphChart.datasets[0].bars[idx].highlightFill = "rgba(0,204,102,0.8)";
+            graphChart.datasets[0].bars[idx].highlightStroke = "rgba(0,204,102,0.8)";
+        } else if (idx <= data.labels.indexOf('Foundation')) {
+            graphChart.datasets[0].bars[idx].fillColor = "rgba(204,0,102,0.5)";
+            graphChart.datasets[0].bars[idx].strokeColor = "rgba(204,0,102,0.5)";
+            graphChart.datasets[0].bars[idx].highlightFill = "rgba(204,0,102,0.8)";
+            graphChart.datasets[0].bars[idx].highlightStroke = "rgba(204,0,102,0.8)";
+        } else if (idx <= data.labels.indexOf('C++')) {
+            graphChart.datasets[0].bars[idx].fillColor = "rgba(255,153,0,0.5)";
+            graphChart.datasets[0].bars[idx].strokeColor = "rgba(255,153,0,0.5)";
+            graphChart.datasets[0].bars[idx].highlightFill = "rgba(255,153,0,0.8)";
+            graphChart.datasets[0].bars[idx].highlightStroke = "rgba(255,153,0,0.8)";
+        }
+    }
+    graphChart.update();
 });
+
+
+

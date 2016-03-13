@@ -77,7 +77,7 @@
 			}
 		},
 		inRange : function(chartX,chartY){
-			return (chartY >= this.y - this.height/2 && chartY <= this.y + this.height/2) && (chartX >= this.left && chartX <= this.right);
+			return (chartY >= this.y - this.height/2 && chartY <= this.y + this.height/2) && (chartX >= this.left && chartX <= this.x);
 		}
 	});
 

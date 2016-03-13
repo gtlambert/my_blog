@@ -238,13 +238,13 @@ hr {
 	margin: 0px auto;
 	display: block;
 	width: 700px;
-	height: 400px;
+	height: 800px;
 }
 
 #chartjs-tooltip {
-        opacity: 1;
+        opacity: 0;
         position: absolute;
-        background: rgba(0, 0, 0, .7);
+        background: rgba(0, 0, 0, .9);
         color: white;
         padding: 3px 15px;
         border-radius: 12px;
@@ -253,6 +253,7 @@ hr {
         pointer-events: none;
         -webkit-transform: translate(-50%, 0);
         transform: translate(-50%, 0);
+        max-width: 300px;
 
         h4 {
         	color: white;
