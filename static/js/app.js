@@ -184,123 +184,116 @@ var data = {
 };
 
 Chart.defaults.global.pointHitDetectionRadius = 5;
-    Chart.defaults.global.customTooltips = function(tooltip) {
-        console.log('in the tooltip function');
+Chart.defaults.global.customTooltips = function(tooltip) {
+    console.log('in the tooltip function');
 
-        if (tooltip.value === null)
-            throw ''
+    var tooltipEl = $('#chartjs-tooltip');
 
-        var tooltipEl = $('#chartjs-tooltip');
-
-        if (!tooltip) {
-            tooltipEl.css({
-                opacity: 0,
-            });
-            return;
-        }
-
-        tooltipEl.removeClass('above below');
-        tooltipEl.addClass(tooltip.yAlign);
-   
-        console.log('the tooltip is');
-        console.log(tooltip);
-        console.log('the tooltip text is');
-        console.log(tooltip.text);
-        if (tooltip.text.replace(/ /g,'').startsWith('Python')) {
-        	content = '<h4 class="text-center">Python</h4><br>' +
-        			  '<p><strong>Maths:</strong> NumPy, Pandas, SciPy, matplotlib<br>' +
-        			  '<strong>Scraping:</strong> lxml, Scrapy, BeautifulSoup, XPath, PyQuery<br>' + 
-        			  '<strong>Testing</strong>: Selenium, PhantomJS<br>' +
-        			  '<strong>Web Frameworks:</strong> Django, Flask<br>' +
-        			  '<strong>Stack Overflow:</strong> Silver badge holder';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('Ruby')) {
-        	content = '<h4 class="text-center">Ruby</h4><br>' +
-        			  '<p>I just know the basics!</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('Django')) {
-        	content = '<h4 class="text-center">Django</h4><br>' + 
-        			  '<p>Over a year of industry experience</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('Flask')) {
-        	content = '<h4 class="text-center">Flask</h4><br>' +
-        		      '<p>Spent about 3 months learning Flask on ' +
-        			  'the way to learning Django</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('C++')) {
-        	content = '<h4 class="text-center">C++</h4><br>' + 
-        			  '<p>A year of intensive use while studying ' + 
-        			  'for an MSc at Imperial</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('AngularJS')) {
-        	content = '<h4 class="text-center">AngularJS</h4><br>' + 
-        			   '<p>6 months of industry use.<br>' + 
-        			   '<strong>Plugins:</strong> ui-grid, text angular, ' +
-        			   'Angular file uploader, ui-select, anguautocomplete-alt</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('JavaScript')) {
-        	content = '<h4 class="text-center">JavaScript</h4><br>' +
-        			  '<p>A year of experience.<br>' + 
-        			  '<strong>Frameworks:</strong> JQuery, AngularJS<br>' +
-        			  '<strong>Plugins:</strong> Chart.js, JQuery layout, ui-grid, '+
-        			  'ui-select, Text Angular, anguautocomplete-alt</p>'; 
-        } else if (tooltip.text.replace(/ /g,'').startsWith('Sass')) {
-        	content = '<h4 class="text-center">Sass</h4><br>' + 
-        			  '<p>I use this to speed up my styling, ' + 
-        			  'but this isn\'t where I focus my time.</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('HTML')) {
-        	content = '<h4 class="text-center">HTML5</h4><br>' + 
-        			  '<p>18 months of regular use</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('CSS')) {
-        	content = '<h4 class="text-center">CSS</h4><br>' + 
-        	          '<p>Getting better every day!</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('Bootstrap')) {
-        	content = '<h4 class="text-center">Bootstrap</h4><br>' + 
-        			  '<p>I enjoy using Bootstrap, but lack experience</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('Foundation')) {
-        	content = '<h4 class="text-center">Foundation</h4><br>' +
-        			  '<p>My styling framework of choice</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('AWS')) {
-            content = '<h4 class="text-center">AWS</h4><br>' + 
-                       '<p>I know the basics</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('Google')) {
-            content = '<h4 class="text-center">Google App Engine</h4><br>' + 
-                      '<p>Haven\'t got too much past "Hello World" ' + 
-                      'apps in Django and Flask</p>';            
-        } else if (tooltip.text.replace(/ /g,'').startsWith('Heroku')) {
-            content = '<h4 class="text-center">Heroku</h4><br>' + 
-                      '<p>My go to PaaS provider. I\'ve used ' + 
-                      'Heroku for multiple work and personal Django ' +
-                      'and Flask projects for over a year</p>'
-        } else if (tooltip.text.replace(/ /g,'').startsWith('GitH')) {
-            content = '<h4 class="text-center">GitHub</h4><br>' + 
-                      '<p>My go to repository hosting service for both work and personal projects</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('Git')) {
-            content = '<h4 class="text-center">Git</h4><br>' + 
-                      '<p>100% confident using Git as my VCS.</p>'
-        } else if (tooltip.text.replace(/ /g,'').startsWith('Bitbucket')) {
-            content = '<h4 class="text-center">Bitbucket</h4><br>' + 
-                      '<p>The repository hosting service I use if I need something free and private!</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('Gulp')) {
-            content = '<h4 class="text-center">Gulp</h4><br>' + 
-                      '<p>My go to task runner.</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('Grunt')) {
-            content = '<h4 class="text-center">Grunt</h4><br>' + 
-                      '<p>Not my first choice task runner, but I use it in projects set up by Grunters</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('SQL')) {
-            content = '<h4 class="text-center">SQL</h4><br>' +
-                      '<p>I know the CRUD and querying basics, but usually use a Python hook - either Django or Flask with PostgreSQL</p>';
-        } else if (tooltip.text.replace(/ /g,'').startsWith('MongoDB')) {
-            content = '<h4 class="text-center">MongoDB</h4><br>' +
-                      '<p>I know the CRUD and querying basics, but usually use a Python hook - either Django or Flask with PostgreSQL</p>'
-        }
-
-        var innerHtml = '<div>' + content + '</div>';
-		tooltipEl.html(innerHtml);
-
+    if (!tooltip) {
         tooltipEl.css({
-            opacity: 1,
-            left: tooltip.chart.canvas.offsetLeft + tooltip.x + 'px',
-            top: tooltip.chart.canvas.offsetTop + tooltip.y + 'px',
-            fontFamily: tooltip.fontFamily,
-            fontSize: tooltip.fontSize,
-            fontStyle: tooltip.fontStyle,
+            opacity: 0,
         });
-    };
+        return;
+    }
+
+    tooltipEl.removeClass('above below');
+    tooltipEl.addClass(tooltip.yAlign);
+
+    if (tooltip.text.replace(/ /g,'').startsWith('Python')) {
+    	content = '<h4 class="text-center">Python</h4><br>' +
+    			  '<p><strong>Maths:</strong> NumPy, Pandas, SciPy, matplotlib<br>' +
+    			  '<strong>Scraping:</strong> lxml, Scrapy, BeautifulSoup, XPath, PyQuery<br>' + 
+    			  '<strong>Testing</strong>: Selenium, PhantomJS<br>' +
+    			  '<strong>Web Frameworks:</strong> Django, Flask<br>' +
+    			  '<strong>Stack Overflow:</strong> Silver badge holder';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('Ruby')) {
+    	content = '<h4 class="text-center">Ruby</h4><br>' +
+    			  '<p>I just know the basics!</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('Django')) {
+    	content = '<h4 class="text-center">Django</h4><br>' + 
+    			  '<p>Over a year of industry experience</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('Flask')) {
+    	content = '<h4 class="text-center">Flask</h4><br>' +
+    		      '<p>Spent about 3 months learning Flask on ' +
+    			  'the way to learning Django</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('C++')) {
+    	content = '<h4 class="text-center">C++</h4><br>' + 
+    			  '<p>A year of intensive use while studying ' + 
+    			  'for an MSc at Imperial</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('AngularJS')) {
+    	content = '<h4 class="text-center">AngularJS</h4><br>' + 
+    			   '<p>6 months of industry use.<br>' + 
+    			   '<strong>Plugins:</strong> ui-grid, text angular, ' +
+    			   'Angular file uploader, ui-select, anguautocomplete-alt</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('JavaScript')) {
+    	content = '<h4 class="text-center">JavaScript</h4><br>' +
+    			  '<p>A year of experience.<br>' + 
+    			  '<strong>Frameworks:</strong> JQuery, AngularJS<br>' +
+    			  '<strong>Plugins:</strong> Chart.js, JQuery layout, ui-grid, '+
+    			  'ui-select, Text Angular, anguautocomplete-alt</p>'; 
+    } else if (tooltip.text.replace(/ /g,'').startsWith('Sass')) {
+    	content = '<h4 class="text-center">Sass</h4><br>' + 
+    			  '<p>I use this to speed up my styling, ' + 
+    			  'but this isn\'t where I focus my time.</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('HTML')) {
+    	content = '<h4 class="text-center">HTML5</h4><br>' + 
+    			  '<p>18 months of regular use</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('CSS')) {
+    	content = '<h4 class="text-center">CSS</h4><br>' + 
+    	          '<p>Getting better every day!</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('Bootstrap')) {
+    	content = '<h4 class="text-center">Bootstrap</h4><br>' + 
+    			  '<p>I enjoy using Bootstrap, but lack experience</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('Foundation')) {
+    	content = '<h4 class="text-center">Foundation</h4><br>' +
+    			  '<p>My styling framework of choice</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('AWS')) {
+        content = '<h4 class="text-center">AWS</h4><br>' + 
+                   '<p>I know the basics</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('Google')) {
+        content = '<h4 class="text-center">Google App Engine</h4><br>' + 
+                  '<p>Haven\'t got too much past "Hello World" ' + 
+                  'apps in Django and Flask</p>';            
+    } else if (tooltip.text.replace(/ /g,'').startsWith('Heroku')) {
+        content = '<h4 class="text-center">Heroku</h4><br>' + 
+                  '<p>My go to PaaS provider. I\'ve used ' + 
+                  'Heroku for multiple work and personal Django ' +
+                  'and Flask projects for over a year</p>'
+    } else if (tooltip.text.replace(/ /g,'').startsWith('GitH')) {
+        content = '<h4 class="text-center">GitHub</h4><br>' + 
+                  '<p>My go to repository hosting service for both work and personal projects</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('Git')) {
+        content = '<h4 class="text-center">Git</h4><br>' + 
+                  '<p>100% confident using Git as my VCS.</p>'
+    } else if (tooltip.text.replace(/ /g,'').startsWith('Bitbucket')) {
+        content = '<h4 class="text-center">Bitbucket</h4><br>' + 
+                  '<p>The repository hosting service I use if I need something free and private!</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('Gulp')) {
+        content = '<h4 class="text-center">Gulp</h4><br>' + 
+                  '<p>My go to task runner.</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('Grunt')) {
+        content = '<h4 class="text-center">Grunt</h4><br>' + 
+                  '<p>Not my first choice task runner, but I use it in projects set up by Grunters</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('SQL')) {
+        content = '<h4 class="text-center">SQL</h4><br>' +
+                  '<p>I know the CRUD and querying basics, but usually use a Python hook - either Django or Flask with PostgreSQL</p>';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('MongoDB')) {
+        content = '<h4 class="text-center">MongoDB</h4><br>' +
+                  '<p>I know the CRUD and querying basics, but usually use a Python hook - either Django or Flask with PostgreSQL</p>'
+    }
+
+    var innerHtml = '<div>' + content + '</div>';
+	tooltipEl.html(innerHtml);
+
+    tooltipEl.css({
+        opacity: 1,
+        left: tooltip.chart.canvas.offsetLeft + tooltip.x + 'px',
+        top: tooltip.chart.canvas.offsetTop + tooltip.y + 'px',
+        fontFamily: tooltip.fontFamily,
+        fontSize: tooltip.fontSize,
+        fontStyle: tooltip.fontStyle,
+    });
+};
 
 $(document).ready(function() {
 	var graph = document.getElementById("graph").getContext("2d");

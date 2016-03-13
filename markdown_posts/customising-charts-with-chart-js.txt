@@ -1,0 +1,154 @@
+I recently used the excellent [Charts.js](http://www.chartjs.org/) plugin to put together a [bar chart demonstrating my tech stack](http://www.gtlambert.com/tech-stack). As with all JavaScript plugins, it is pretty simple to put together a basic implementation, but to achieve a more specific goal/outcome can require a bit more customisation.
+
+Here are my tips for customising bar charts with Chart.js:
+
+#### Hiding/removing the axes
+To hide or remove the axes, simply set them to be `transparent`. You can do this with `scaleLineColor` in `Chart.defaults.global`:
+
+```
+Chart.defaults.global.scaleLineColor = 'tranparent';
+```
+
+#### Customise the y-axis labels
+To customise the y-axis labels, use a custom function for `scaleLabel` in `Chart.defaults.global`. The function has one argument (the value on the axes), and returns the desired label.
+
+```
+Chart.defaults.global.scaleLabel = function (val) {
+	switch (val) {
+		case 20:
+			return 'beginner';
+			break;
+		case 40:
+			return 'rookie';
+			break;
+		case 60:
+			return 'intermediate';
+			break;
+		case 80:
+			return 'pro';
+			break;
+		case 100:
+			return 'expert';
+			break;
+	}
+}
+```
+
+#### Creating a horizontal bar chart
+The `Chart.js` plugin does not currently support horizontal bar charts. However, the excellent [Chart.HorizontalBar.js](https://github.com/tomsouthall/Chart.HorizontalBar.js) extension provides this functionality in a simple format. Simply install `Chart.HorizontalBar.js` with Bower, reference it on your website, then instead of using:
+
+```
+var barChart = new Chart(ctx).Bar(data, options);
+```
+
+....use:
+
+```
+var horizontalBarChart = new Chart(ctx).HorizontalBar(data, options);
+```
+
+Easy....until....
+
+...the tooltips stopped working. I couldn't get the bar tooltips to show using `Chart.HorizontalBar.js` until I came across [this issue](https://github.com/tomsouthall/Chart.HorizontalBar.js/issues/12) on GitHub. Replacing:
+
+```
+chartX >= this.left && chartX <= this.right
+```
+
+...with
+
+```
+chartX >= this.left && chartX <= this.x
+```
+
+in `Chart.HorizontalBar.js` made the tooltips start working again! 
+
+#### Prevent bar labels from being cut off
+It is a [known issue/bug](https://github.com/nnnick/Chart.js/issues/729) in `Chart.js` that the bar labels can get cut off unnecessarily. My hack to avoid this problem was to prepend each of my bar labels with 10 characters of whitespace. Dirty, but it worked.
+
+#### Customising the tooltips
+You can customise the tooltips by creating a custom function with `Chart.defaults.global.customTooltips`. I modified the [official example](https://github.com/nnnick/Chart.js/blob/master/samples/line-customTooltips.html). Key steps are:
+
+1. Include `<div id="chartjs-tooltip"></div>` in your template.
+2. Include the [relevant CSS](https://github.com/nnnick/Chart.js/blob/master/samples/line-customTooltips.html)
+3. Define your `Chart.defaults.global.customTooltips` function - my example is below.
+
+```
+Chart.defaults.global.customTooltips = function(tooltip) {
+    var tooltipEl = $('#chartjs-tooltip');
+
+    if (!tooltip) {
+        tooltipEl.css({
+            opacity: 0,
+        });
+        return;
+    }
+
+    tooltipEl.removeClass('above below');
+    tooltipEl.addClass(tooltip.yAlign);
+
+    if (tooltip.text.replace(/ /g,'').startsWith('Python')) {
+    	content = '<h4 class="text-center">Python</h4><br>' +
+    			  '<p><strong>Maths:</strong> NumPy, Pandas, SciPy, matplotlib<br>' +
+    			  '<strong>Scraping:</strong> lxml, Scrapy, BeautifulSoup, XPath, PyQuery<br>' + 
+    			  '<strong>Testing</strong>: Selenium, PhantomJS<br>' +
+    			  '<strong>Web Frameworks:</strong> Django, Flask<br>' +
+    			  '<strong>Stack Overflow:</strong> Silver badge holder';
+    } else if (tooltip.text.replace(/ /g,'').startsWith('Ruby')) {
+    	content = '<h4 class="text-center">Ruby</h4><br>' +
+    			  '<p>I just know the basics!</p>';
+    }
+
+    var innerHtml = '<div>' + content + '</div>';
+	tooltipEl.html(innerHtml);
+
+    tooltipEl.css({
+        opacity: 1,
+        left: tooltip.chart.canvas.offsetLeft + tooltip.x + 'px',
+        top: tooltip.chart.canvas.offsetTop + tooltip.y + 'px',
+        fontFamily: tooltip.fontFamily,
+        fontSize: tooltip.fontSize,
+        fontStyle: tooltip.fontStyle,
+    });
+};
+```
+
+#### Changing the colour of specific bars
+You can control the colour of specific bars in your chart through `chart.datasets[0].bars[barIndex]`. For example, in my bar chart I looped over all of the bars and altered the colour of the bars depending on their name. I then called `chart.update()` to update the chart:
+
+```
+for (var idx = 0; idx < chart.datasets[0].bars.length; idx++) {
+
+    if (idx <= data.labels.indexOf('AWS')) {
+        chart.datasets[0].bars[idx].fillColor = "rgba(192,192,192,0.5)";
+        chart.datasets[0].bars[idx].strokeColor = "rgba(192,192,192,0.5)";
+        chart.datasets[0].bars[idx].highlightFill = "rgba(192,192,192,0.8)";
+        chart.datasets[0].bars[idx].highlightStroke = "rgba(192,192,192,0.8)";
+    } else if (idx <= data.labels.indexOf('Grunt')) {
+        chart.datasets[0].bars[idx].fillColor = "rgba(100,149,237,0.5)";
+        chart.datasets[0].bars[idx].strokeColor = "rgba(100,149,237,0.5)";
+        chart.datasets[0].bars[idx].highlightFill = "rgba(100,149,237,0.8)";
+        chart.datasets[0].bars[idx].highlightStroke = "rgba(100,149,237,0.8)";
+    } else if (idx <= data.labels.indexOf('MongoDB')) {
+        chart.datasets[0].bars[idx].fillColor = "rgba(0,204,102,0.5)";
+        chart.datasets[0].bars[idx].strokeColor = "rgba(0,204,102,0.5)";
+        chart.datasets[0].bars[idx].highlightFill = "rgba(0,204,102,0.8)";
+        chart.datasets[0].bars[idx].highlightStroke = "rgba(0,204,102,0.8)";
+    } else if (idx <= data.labels.indexOf('Foundation')) {
+        chart.datasets[0].bars[idx].fillColor = "rgba(204,0,102,0.5)";
+        chart.datasets[0].bars[idx].strokeColor = "rgba(204,0,102,0.5)";
+        chart.datasets[0].bars[idx].highlightFill = "rgba(204,0,102,0.8)";
+        chart.datasets[0].bars[idx].highlightStroke = "rgba(204,0,102,0.8)";
+    } else if (idx <= data.labels.indexOf('C++')) {
+        chart.datasets[0].bars[idx].fillColor = "rgba(255,153,0,0.5)";
+        chart.datasets[0].bars[idx].strokeColor = "rgba(255,153,0,0.5)";
+        chart.datasets[0].bars[idx].highlightFill = "rgba(255,153,0,0.8)";
+        chart.datasets[0].bars[idx].highlightStroke = "rgba(255,153,0,0.8)";
+    }
+}
+chart.update();
+```
+
+#### Summary
+`Chart.js` is awesome. I hope that the tips I've put together in this article save you a bit of time!
+
