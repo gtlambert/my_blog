@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block title %}Tech Stack | George Lambert{% endblock title %}
+
+{% block custom-head-content %}
+<script src="{% static 'bower_components/Chart.js/Chart.min.js' %}"></script>
+<script src="{% static 'bower_components/Chart.HorizontalBar.js/Chart.HorizontalBar.js' %}"></script>
+{% endblock custom-head-content %}
 
 {% block header-content %}
 	{{ block.super }}

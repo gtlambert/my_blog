@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', blogapp_views.home, name='home'),
     url(r'^blog/', include('blogapp.urls')),
-    url(r'^tech-stack/', blogapp_views.tech_stack, name='tech-stack'),
-
+    url(r'^tech-stack$', blogapp_views.tech_stack, name='tech-stack'),
+    url(r'^find-me$', blogapp_views.find_me, name='find-me'),
 ]
