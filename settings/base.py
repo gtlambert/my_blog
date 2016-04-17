@@ -3,10 +3,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'asdq230489y4679adf90uq32r409uasd;kjasd-0u9q2390uq349'
-
-
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
@@ -16,7 +13,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blogapp'
+    'blogapp',
+    'admin_honeypot',
 )
 
 MIDDLEWARE_CLASSES = (
