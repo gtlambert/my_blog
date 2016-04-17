@@ -8,7 +8,7 @@ class Post(models.Model):
     intro = models.TextField(max_length=1000, blank=True, null=True)
     slug = models.SlugField(unique=True)
     text = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField()
     custom_css = models.TextField(max_length=10000, blank=True, null=True)
     custom_closing_body_script_reference = models.TextField(max_length=10000, blank=True, null=True)
     custom_closing_body_script = models.TextField(max_length=10000, blank=True, null=True)
