@@ -10,8 +10,11 @@ class Post(models.Model):
     text = models.TextField()
     created_on = models.DateTimeField()
     custom_css = models.TextField(max_length=10000, blank=True, null=True)
-    custom_closing_body_script_reference = models.TextField(max_length=10000, blank=True, null=True)
-    custom_closing_body_script = models.TextField(max_length=10000, blank=True, null=True)
+    custom_closing_body_script_reference = models.TextField(
+        max_length=10000, blank=True, null=True)
+    custom_closing_body_script = models.TextField(
+        max_length=10000, blank=True, null=True)
+    live = models.BooleanField()
 
     def __unicode__(self):
         return self.title
@@ -36,7 +39,7 @@ class Project(models.Model):
 class Language(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateField()
-    image_path = models.CharField(max_length=100) # will this need to be markdown using template tag filter?
+    image_path = models.CharField(max_length=100)
 
     def __unicode__(self):
         return self.name
